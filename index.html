@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Chosen Palette: Warm Neutrals -->
-    <!-- Application Structure Plan: Se ha diseñado una SPA con una estructura de navegación superior fija que permite al usuario saltar a diferentes secciones temáticas: 'Inicio' (resumen), 'Trayectoria' (línea de tiempo interactiva), 'Habilidades' (gráficos dinámicos) y 'Análisis' (fortalezas clave). Esta estructura se eligió para facilitar una exploración no lineal del perfil, permitiendo que un reclutador o el propio usuario pueda acceder directamente a la información de su interés. La interactividad se centra en filtros para las habilidades y tooltips en la trayectoria para ofrecer detalles sin sobrecargar la vista principal. El flujo está pensado para ir de lo general (resumen) a lo específico (detalles de roles y tecnologías), promoviendo el descubrimiento progresivo. -->
-    <!-- Visualization & Content Choices: 1. Resumen Profesional (Inicio) -> Goal: Informar -> Method: Texto destacado y tarjetas con métricas clave (años de experiencia, roles de liderazgo). Interaction: Ninguna, es una vista estática de alto impacto. Justification: Ofrece un panorama rápido y conciso. 2. Trayectoria Profesional -> Goal: Mostrar cambio/evolución -> Method: Línea de tiempo vertical interactiva creada con HTML/CSS/Tailwind. Interaction: Hover sobre cada punto para mostrar detalles del rol. Justification: Es una forma visualmente atractiva y cronológicamente intuitiva de presentar la experiencia. 3. Habilidades Técnicas -> Goal: Comparar/Organizar -> Method: Gráfico de barras horizontales (Chart.js) para lenguajes/frameworks y un gráfico polar (Chart.js) para bases de datos. Interaction: Botones para filtrar por categoría (Lenguajes, BD, Herramientas). Justification: Permite una comparación visual rápida de la competencia en diferentes áreas. 4. Fortalezas Clave (Análisis) -> Goal: Organizar/Informar -> Method: Tarjetas de contenido con iconos (HTML/Unicode) para destacar habilidades blandas y de liderazgo. Interaction: Ligero efecto de hover. Justification: Sintetiza las conclusiones del informe en puntos focales y fáciles de digerir. -->
+    <!-- Application Structure Plan: La aplicación se estructura como una SPA con navegación superior fija para un acceso rápido a las secciones: 'Inicio' (resumen e impacto visual), 'Trayectoria' (línea de tiempo interactiva), 'Habilidades' (visualización de datos con filtros) y 'Análisis' (fortalezas clave). Esta arquitectura no lineal fue elegida para permitir que un usuario, como un reclutador, pueda ir directamente a la información más relevante para él, mejorando la usabilidad. Las interacciones clave son la expansión de detalles en la trayectoria y el filtrado de habilidades, diseñadas para presentar información compleja de forma progresiva y digerible. -->
+    <!-- Visualization & Content Choices: 1. Trayectoria Profesional -> Goal: Mostrar evolución -> Method: Línea de tiempo vertical con tarjetas expandibles (HTML/CSS/JS). Interaction: Clic para expandir/contraer. Justification: Presenta una larga carrera de forma compacta, permitiendo al usuario profundizar a demanda. 2. Habilidades Técnicas -> Goal: Comparar y Organizar -> Method: Gráfico de barras horizontales (Chart.js) y un gráfico de área polar para bases de datos. Interaction: Botones de filtro que cambian la visualización. Justification: Permite una comparación visual clara de la competencia en diversas tecnologías, evitando la sobrecarga de información. El gráfico polar se usa para representar la experiencia en bases de datos de forma visualmente atractiva. 3. Fortalezas Clave -> Goal: Informar/Sintetizar -> Method: Tarjetas con iconos (HTML/Unicode). Interaction: Efecto hover sutil. Justification: Destaca las habilidades blandas y temas de carrera de forma visualmente atractiva y fácil de escanear. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
@@ -53,7 +53,7 @@
             content: '';
             position: absolute;
             left: -21px;
-            top: 50%;
+            top: 24px;
             transform: translateY(-50%);
             width: 12px;
             height: 12px;
@@ -68,7 +68,7 @@
             padding-top: 0;
         }
         .timeline-item.expanded .details {
-            max-height: 1000px; /* Large enough value */
+            max-height: 1000px;
             padding-top: 1rem;
         }
         .chevron {
@@ -112,8 +112,18 @@
             <div class="w-full">
                 <h1 class="text-5xl md:text-7xl font-bold text-gray-800 mb-4">Juan Manuel Espinoza Nevárez</h1>
                 <p class="text-xl md:text-2xl text-[#D4A373] font-semibold mb-8">Ingeniero de Software | Arquitecto Empresarial | Líder Técnico</p>
+                <div class="flex flex-wrap gap-x-6 gap-y-2 mb-8">
+                    <a href="mailto:juanmespinoza@gmail.com" class="flex items-center gap-2 text-gray-600 hover:text-[#D4A373] transition-colors">
+                        <i class="fas fa-envelope"></i>
+                        <span>juanmespinoza@gmail.com</span>
+                    </a>
+                    <a href="https://wa.me/528110416872" target="_blank" class="flex items-center gap-2 text-gray-600 hover:text-[#D4A373] transition-colors">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>+52 8110 416872</span>
+                    </a>
+                </div>
                 <p class="max-w-3xl text-lg text-gray-600 mb-10">
-                    Un profesional con casi dos décadas de experiencia, especializado en el desarrollo y liderazgo de proyectos complejos. Mi trayectoria abarca desde el desarrollo de software hasta la arquitectura empresarial y la gestión de equipos, siempre con un enfoque en la escalabilidad, el rendimiento y la fiabilidad de las soluciones tecnológicas.
+                    Ingeniero en sistemas con casi dos décadas de experiencia en la progresión desde el desarrollo de software hasta el liderazgo técnico y la arquitectura empresarial. Mi carrera se define por la resolución de problemas complejos, la gestión de equipos y un enfoque en la escalabilidad, el rendimiento y la fiabilidad de las soluciones tecnológicas.
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl">
                     <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#D4A373]">
@@ -121,8 +131,8 @@
                         <p class="text-gray-500">Años de Experiencia</p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#D4A373]">
-                        <h3 class="text-3xl font-bold text-gray-800">50+</h3>
-                        <p class="text-gray-500">Colaboradores Liderados</p>
+                        <h3 class="text-3xl font-bold text-gray-800">70+</h3>
+                        <p class="text-gray-500">Empresas Apoyadas</p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#D4A373]">
                         <h3 class="text-3xl font-bold text-gray-800">L4</h3>
@@ -131,13 +141,13 @@
                 </div>
             </div>
         </section>
-        
+
         <section id="trayectoria" class="py-20">
             <h2 class="text-4xl font-bold text-center mb-4 text-gray-800">Trayectoria Profesional</h2>
             <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-16">
-                Un recorrido por los roles clave que han definido mi carrera, mostrando una evolución desde el desarrollo técnico hasta el liderazgo estratégico y la gestión de operaciones críticas. Haz clic en cada tarjeta para ver los detalles.
+                Un recorrido por los roles clave que han definido mi carrera, mostrando una evolución desde el desarrollo técnico hasta el liderazgo estratégico y la gestión de operaciones críticas. Haz clic en cada puesto para ver los detalles.
             </p>
-            <div class="relative max-w-3xl mx-auto border-l-2 border-gray-200 pl-10">
+            <div id="timeline-container" class="relative max-w-3xl mx-auto border-l-2 border-gray-200 pl-10">
             </div>
         </section>
 
@@ -152,7 +162,7 @@
                 <button class="skill-filter-btn bg-white text-gray-700 px-6 py-2 rounded-full font-semibold shadow-md" data-filter="tools">Herramientas & Metodologías</button>
             </div>
             <div class="chart-container">
-                <canvas id="skillsChart"></canvas>
+                <canvas id="skillsChart" class=""></canvas>
             </div>
         </section>
 
@@ -194,120 +204,94 @@
 
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-6 text-center">
-            <p>&copy; <script>document.getElementById('currentYear').textContent = new Date().getFullYear();</script> Juan Manuel Espinoza Nevarez. Perfil Interactivo.</p>
+            <p>&copy; <span id="current-year"></span> Juan Manuel Espinoza Nevarez. Perfil Interactivo.</p>
             <p class="text-sm text-gray-400 mt-2">Generado como una visualización interactiva de mi carrera profesional.</p>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const menuBtn = document.getElementById('menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const navLinks = document.querySelectorAll('.nav-link');
-            const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
-            const sections = document.querySelectorAll('section');
 
-            menuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-
-            const closeMobileMenu = () => {
-                mobileMenu.classList.add('hidden');
-            };
-
-            mobileNavLinks.forEach(link => {
-                link.addEventListener('click', closeMobileMenu);
-            });
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href').substring(1) === entry.target.id) {
-                                link.classList.add('active');
-                            }
-                        });
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-            
-            // Comprehensive and detailed timeline data
             const timelineData = [
                 {
                     period: 'Ene 2025 – Presente',
-                    role: 'Supervisor de Soporte de Aplicaciónes de Comercio Exterior',
+                    role: 'Supervisor de soporte de aplicaciones de comercio exterior',
                     company: 'American Industries',
-                    summary: 'Superviso el soporte tecnológico para las plataformas de Comercio Exterior y Aduanas, y administro el proyecto TCS, asegurando la calidad y el despliegue a producción. Utilizo **Docker** para la gestión de contenedores y **GitLab** para la integración continua y el control de versiones.',
+                    summary: 'Supervisión y gestión de aplicaciones críticas para el comercio exterior, asegurando la continuidad operativa de 70 empresas bajo el esquema de shelter.',
                     details: `
                         <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                            <li>Encargado de dar soporte de tecnología a las diversas plataformas de aplicaciones de Comercio Exterior y Aduanas.</li>
-                            <li>Administrador del proyecto TCS.</li>
-                            <li>Encargado de controlar el desarrollo de la plataforma.</li>
-                            <li>Soporte técnico y administración de subida a producción de diferentes clientes.</li>
-                            <li>Uso de **Docker** para la gestión de entornos de desarrollo y despliegue.</li>
-                            <li>Colaboración y gestión del código en **GitLab** para el control de versiones e integración continua.</li>
+                            <li>Asegurar la correcta operación de aplicaciones críticas para el proceso de cruce de aduanas.</li>
+                            <li>Manejo y administración de la plataforma de Anexo 24 ZOE.</li>
+                            <li>Brindar soporte a usuarios de aplicaciones y macros necesarias para la operación.</li>
+                            <li>Apoyo a alrededor de 70 empresas bajo el esquema de shelter para sus operaciones de importación y exportación.</li>
+                            <li>Administración del proyecto de desarrollo y mejora de la plataforma TCS.</li>
+                            <li>Administración de GitLab, Docker y servicios de la plataforma en Ruby on Rails, Angular y Postgresql.</li>
                         </ul>
                     `
                 },
                 {
                     period: 'May 2023 – Abr 2024',
-                    role: 'Software Engineering Manager',
+                    role: 'Software Engineering Manager / Business Consulting IV',
                     company: 'DXC Technology',
-                    summary: 'Lideré equipos de ingeniería, optimicé procesos con metodologías Agile y aseguré la fiabilidad de sistemas complejos, gestionando incidentes y rastreando causas raíz de fallos.',
+                    summary: 'Gestión de ingeniería de software, optimización de procesos Agile y garantía de la fiabilidad de sistemas complejos.',
                     details: `
                         <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                            <li>Gestión y desarrollo de aplicaciones utilizando Java y Spring, asegurando la implementación de estándares de diseño de alta calidad.</li>
-                            <li>Definición y control de estándares de arquitectura empresarial usando TOGAF y Archimate 2.0.</li>
-                            <li>Supervisión de la arquitectura empresarial, gestión de la seguridad y el gobierno de TI, y optimización de bases de datos.</li>
-                            <li>Liderazgo y gestión de proyectos, así como la mentoría y el desarrollo de talento en los equipos.</li>
-                            <li>Resolución de problemas complejos y comunicación efectiva con equipos de TI, arquitectos y socios comerciales.</li>
+                            <li>Colaboración con product owners para definir el alcance y los requisitos del proyecto.</li>
+                            <li>Implementación de metodologías Agile para optimizar los procesos de desarrollo.</li>
+                            <li>Gestión de tickets de incidentes y resolución proactiva de problemas técnicos (SQL, Java, JavaScript, HTML5).</li>
+                            <li>Rastreo de causas raíz de fallos y documentación para asegurar el rendimiento óptimo del sistema.</li>
                         </ul>
                     `
                 },
                 {
                     period: 'Oct 2019 – Ene 2023',
                     role: 'PHP Developer / Triage Engineer',
-                    company: 'Concentrix Catalyst',
-                    summary: 'Fui clave en el monitoreo proactivo y la resolución de incidentes, asegurando el "UpTime" de sistemas críticos mediante el uso de Splunk, AppDynamics y Azure. Integré middleware PHP y mantuve aplicaciones Java.',
+                    company: 'Concentrix Catalyst (Asignado a Honeywell/T-mobile)',
+                    summary: 'Combinación de desarrollo y soporte, asegurando el "UpTime" de sistemas críticos con monitoreo proactivo.',
                     details: `
                         <ul class="list-disc pl-5 space-y-2 text-gray-600">
                             <li>Integración de middleware PHP entre BigCommerce y Visual ERP.</li>
                             <li>Mantenimiento de aplicaciones en Java 8 con Spring y Spring Boot.</li>
-                            <li>Monitoreo y análisis para el control de incidencias, utilizando Splunk, AppDynamics, Grafana y Azure.</li>
-                            <li>Resolución de problemas en producción para minimizar el tiempo de inactividad.</li>
+                            <li>Monitoreo y análisis para el control de incidencias usando Splunk, AppDynamics, Grafana y Azure.</li>
+                            <li>Desarrollo de KPIs y Dashboards para mejorar el monitoreo y evaluación de riesgos en tiempo real.</li>
                         </ul>
                     `
                 },
                 {
                     period: 'Nov 2018 – Sep 2019',
                     role: 'Desarrollador Sr',
-                    company: 'Dresden Partners (HCL/Nokia)',
-                    summary: 'Desarrollé herramientas y flujos de trabajo en un sistema propietario de Nokia, colaborando estrechamente con equipos de QA para asegurar la calidad y la correcta ejecución.',
+                    company: 'Dresden Partners (Asignado a HCL/Nokia)',
+                    summary: 'Desarrollo de herramientas y flujos de trabajo en un sistema propietario de Nokia.',
                     details: `
                         <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                            <li>Desarrollo de herramientas utilizando RhinoJS, HTML, JSON, Hibernate, Oracle y MariaDB.</li>
-                            <li>Creación de flujos de trabajo basados en documentación.</li>
-                            <li>Colaboración con QA para asegurar la calidad y la correcta ejecución.</li>
-                            <li>Desarrollo de servicios web para conectar con sistemas de terceros.</li>
+                            <li>Aplicación de tecnologías como RhinoJS, HTML, JSON, Hibernate, Oracle, MariaDB y WebServices.</li>
+                            <li>Colaboración estrecha con equipos de QA para asegurar la calidad y correcta ejecución del software.</li>
                         </ul>
                     `
                 },
                 {
                     period: 'Nov 2015 – Nov 2018',
-                    role: 'Arquitecto Empresarial',
-                    company: 'Softnet Soluciones (Femsa Comercio)',
-                    summary: 'Definí y controlé los estándares de arquitectura para una gran corporación, liderando un equipo de hasta 50 colaboradores y asegurando la alineación tecnológica con los objetivos de negocio usando TOGAF y Archimate.',
+                    role: 'Arquitecto Empresarial / Lead Enterprise Architect',
+                    company: 'Softnet Soluciones (Asignado a Femsa Comercio)',
+                    summary: 'Rol estratégico de alto nivel, definiendo y controlando estándares de arquitectura para una gran corporación.',
                     details: `
                         <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                            <li>Definición y control de estándares de arquitectura para FEMSA Comercio usando TOGAF, Archimate 2.0 y Enterprise Architect.</li>
-                            <li>Gestión de proyectos de arquitectura empresarial.</li>
-                            <li>Generación y seguimiento de KPIs.</li>
-                            <li>Liderazgo de un equipo de hasta 50 colaboradores en una gran empresa, orientado a objetivos y con comunicación constante.</li>
+                            <li>Uso de marcos de trabajo como TOGAF, Archimate 2.0 y Enterprise Architect.</li>
+                            <li>Gestión de proyectos de arquitectura, capacidad de componentes y seguimiento de KPIs.</li>
+                            <li>Liderazgo de hasta 50 colaboradores, asegurando la alineación tecnológica con los objetivos de negocio.</li>
+                        </ul>
+                    `
+                },
+                {
+                    period: 'Abr 2013 – Nov 2015',
+                    role: 'Desarrollador Java/PHP',
+                    company: 'Softnet Soluciones (Asignado a Qualitypost)',
+                    summary: 'Mantenimiento de la aplicación NPOS y desarrollo de soluciones logísticas a nivel nacional.',
+                    details: `
+                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                            <li>Mantenimiento de NPOS (Java, Struts, Hibernate, DB2).</li>
+                            <li>Desarrollo de aplicaciones web en PHP y Oracle para controlar la logística nacional de envío y recolección.</li>
+                            <li>Optimización de la logística automatizada, incluyendo la integración con la plataforma Formiik vía servicios Web REST.</li>
                         </ul>
                     `
                 },
@@ -315,14 +299,25 @@
                     period: 'Oct 2010 – Abr 2013',
                     role: 'Líder de Desarrolladores Java',
                     company: 'Grupo Empresarial EISEI',
-                    summary: 'Gestioné equipos de hasta 12 personas en proyectos para clientes como OXXO y FAMSA, supervisando el ciclo de vida completo del desarrollo, desde la planificación hasta el despliegue.',
+                    summary: 'Paso fundamental hacia el liderazgo, gestionando equipos para clientes como OXXO y FAMSA.',
                     details: `
                         <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                            <li>Gestión de un equipo de desarrollo de hasta 12 personas.</li>
-                            <li>Planificación de proyectos basada en recursos y tiempo de entrega.</li>
-                            <li>Control de entrega de proyectos, documentación y proceso de despliegue.</li>
-                            <li>Apoyo al reclutamiento y selección como experto técnico.</li>
-                            <li>Desarrollo de tecnologías software como OAS Oracle, Oracle 10g, Struts, JSP, jQuery, JDBC, Servlet.</li>
+                            <li>Gestión de equipos de hasta 12 personas.</li>
+                            <li>Planeación de proyectos, control de entregas, documentación y proceso de despliegue.</li>
+                            <li>Apoyo en reclutamiento como experto técnico.</li>
+                            <li>Desarrollo con OAS Oracle, Oracle 10g, Struts, JSP, jQuery, JDBC, Servlets y BC4J.</li>
+                        </ul>
+                    `
+                },
+                {
+                    period: 'Oct 2009 – Feb 2010',
+                    role: 'Desarrollador Web',
+                    company: 'Exosfera.com',
+                    summary: 'Experiencia en desarrollo web con PHP y MySQL, enfocado en maquetación y mantenimiento.',
+                    details: `
+                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                            <li>Desarrollo con PHP y MySQL.</li>
+                            <li>Maquetación de páginas con HTML, CSS, JavaScript, jQuery y Bootstrap.</li>
                         </ul>
                     `
                 },
@@ -330,34 +325,32 @@
                     period: 'Jul 2007 – Oct 2009',
                     role: 'Desarrollador Java',
                     company: 'UACH',
-                    summary: 'Inicié mi carrera desarrollando aplicaciones web internas para la gestión universitaria, sentando las bases de mi experiencia en Java, Struts, Hibernate y PostgreSQL.',
+                    summary: 'Desarrollo de aplicaciones web internas y administración de bases de datos PostgreSQL.',
                     details: `
                         <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                            <li>Evaluación y optimización de sistemas para mejorar el rendimiento.</li>
-                            <li>Apoyo en la resolución de problemas en producción, minimizando el tiempo de inactividad.</li>
-                            <li>Definición e implementación de procedimientos de respaldo y recuperación para prevenir la pérdida de datos.</li>
-                            <li>Diseño de esquemas de bases de datos eficientes para el almacenamiento y recuperación de información.</li>
+                            <li>Desarrollo con Struts, Hibernate, jQuery, Mod-Perl, PHP y JavaScript.</li>
+                            <li>Diseño y administración de bases de datos PostgreSQL para proyectos internos.</li>
                         </ul>
                     `
                 }
             ];
 
-            const timelineContainer = document.querySelector('#trayectoria .relative');
+            const timelineContainer = document.getElementById('timeline-container');
             timelineData.forEach(item => {
                 const timelineItem = document.createElement('div');
                 timelineItem.className = 'timeline-item mb-12 relative';
                 timelineItem.innerHTML = `
                     <div class="card-toggle cursor-pointer bg-white p-6 rounded-lg shadow-md border-l-4 border-gray-200 hover:border-[#D4A373] transition-colors duration-300">
-                        <div class="flex justify-between items-center">
+                        <div class="flex justify-between items-start">
                             <div>
                                 <p class="text-sm font-semibold text-[#D4A373] mb-1">${item.period}</p>
                                 <h3 class="text-xl font-bold text-gray-800">${item.role}</h3>
                                 <p class="text-md font-medium text-gray-600 mb-3">${item.company}</p>
+                                <p class="text-gray-500">${item.summary}</p>
                             </div>
-                            <i class="fas fa-chevron-down text-gray-500 chevron text-lg"></i>
+                            <i class="fas fa-chevron-down text-gray-400 chevron mt-1 ml-4"></i>
                         </div>
-                        <p class="text-gray-500">${item.summary}</p>
-                        <div class="details mt-4">
+                        <div class="details">
                             ${item.details}
                         </div>
                     </div>
@@ -365,29 +358,61 @@
                 timelineContainer.appendChild(timelineItem);
             });
 
-            // Add event listeners for the toggle functionality
             document.querySelectorAll('.card-toggle').forEach(card => {
                 card.addEventListener('click', () => {
-                    const parentItem = card.closest('.timeline-item');
-                    parentItem.classList.toggle('expanded');
+                    card.closest('.timeline-item').classList.toggle('expanded');
                 });
             });
 
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
+            const sections = document.querySelectorAll('section');
+
+            const yearSpan = document.getElementById('current-year');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const closeMobileMenu = () => mobileMenu.classList.add('hidden');
+            mobileNavLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const id = entry.target.getAttribute('id');
+                    const navLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => link.classList.remove('active'));
+                        if(navLink) navLink.classList.add('active');
+                    }
+                });
+            }, { rootMargin: "-50% 0px -50% 0px" });
+
+            sections.forEach(section => observer.observe(section));
+
             const skillsData = {
                 languages: {
-                    labels: ['Java EE (Spring Boot)', 'JavaScript (React, Node)', 'PHP', 'HTML/CSS', 'SQL/PL-SQL'],
-                    values: [10, 10, 7, 10, 9],
-                    title: 'Nivel de Experiencia en Lenguajes y Frameworks (años)'
+                    labels: ['Java EE (Spring Boot)', 'JavaScript (React, Node)', 'PHP', 'HTML/CSS', 'SQL/PL-SQL', 'Ruby on Rails', 'Angular'],
+                    values: [10, 10, 8, 10, 9, 6, 6],
+                    title: 'Nivel de Experiencia en Lenguajes y Frameworks',
+                    backgroundColor: '#D4A373',
                 },
                 databases: {
                     labels: ['Oracle DB', 'MariaDB/MySQL', 'PostgreSQL', 'SQL Server', 'DB2'],
-                    values: [9, 8, 6, 6, 5],
-                    title: 'Dominio en Bases de Datos (escala 1-10)'
+                    values: [9, 8, 8, 6, 5],
+                    title: 'Dominio en Bases de Datos',
+                    backgroundColor: ['#D4A373', '#E1C3A5', '#A27C5A', '#C2B280', '#A4936A'],
                 },
                 tools: {
-                    labels: ['Arquitectura (TOGAF)', 'CI/CD (Jenkins, Git)', 'Monitoreo (Splunk)', 'Agile (Scrum/Kanban)', 'Cloud (Azure)'],
-                    values: [9, 8, 8, 9, 7],
-                    title: 'Competencia en Herramientas y Metodologías (escala 1-10)'
+                    labels: ['Arquitectura (TOGAF)', 'CI/CD (Jenkins, Git)', 'Monitoreo (Splunk)', 'Agile (Scrum/Kanban)', 'Cloud (Azure)', 'GitLab', 'Docker'],
+                    values: [10, 9, 8, 9, 6, 5, 3],
+                    title: 'Competencia en Herramientas y Metodologías',
+                    backgroundColor: '#D4A373',
                 }
             };
 
@@ -401,64 +426,69 @@
 
                 const data = skillsData[filter];
                 const chartType = filter === 'databases' ? 'polarArea' : 'bar';
-                
                 const options = {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            display: chartType === 'polarArea',
+                            display: filter === 'databases',
                             position: 'right',
+                            labels: { boxWidth: 12, font: { family: 'Inter', size: 12 } }
                         },
                         title: {
                             display: true,
                             text: data.title,
                             font: { size: 16 },
-                            padding: { top: 10, bottom: 20 }
+                            padding: { bottom: 20 }
                         },
                         tooltip: {
                             callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed.y !== null) {
-                                        label += context.parsed.y;
-                                    }
-                                    return label;
-                                }
+                                label: (context) => `${context.label}: ${context.parsed.r}/10`
                             }
                         }
                     },
-                    scales: chartType === 'bar' ? {
-                        x: {
-                            beginAtZero: true,
-                            grid: {
-                                display: false
-                            }
-                        },
-                        y: {
-                             grid: {
-                                color: '#e5e7eb'
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e5e5e5' },
+                            grid: { color: '#e5e5e5' },
+                            pointLabels: { font: { size: 12 } },
+                            min: 0,
+                            max: 10,
+                            ticks: {
+                                stepSize: 2,
+                                backdropColor: 'rgba(253, 251, 248, 0.7)',
                             }
                         }
-                    } : {},
-                    indexAxis: chartType === 'bar' ? 'y' : 'x',
+                    },
+                    elements: {
+                        line: { tension: 0.4 }
+                    }
                 };
+
+                if (chartType === 'bar') {
+                    options.indexAxis = 'y';
+                    options.scales = {
+                        x: {
+                            beginAtZero: true,
+                            max: 10,
+                            ticks: { stepSize: 1 },
+                            title: { display: true, text: 'Nivel de experiencia (escala 1-10)', font: { size: 14, weight: 'bold' } }
+                        },
+                        y: { grid: { display: false } }
+                    };
+                    options.plugins.tooltip.callbacks.label = (context) => `${context.label}: ${context.parsed.x}/10`;
+                }
 
                 skillsChart = new Chart(ctx, {
                     type: chartType,
                     data: {
                         labels: data.labels,
                         datasets: [{
-                            label: 'Nivel de Experiencia',
+                            label: 'Nivel de Experiencia (escala 1-10)',
                             data: data.values,
-                            backgroundColor: chartType === 'polarArea' 
-                                ? ['#D4A373', '#E6B88A', '#F1D6B8', '#FAEDE1', '#A97C50']
-                                : '#D4A373',
-                            borderColor: '#FDFBF8',
-                            borderWidth: chartType === 'polarArea' ? 2 : 0,
+                            backgroundColor: data.backgroundColor,
+                            borderWidth: 1,
+                            borderColor: '#ffffff',
                         }]
                     },
                     options: options
