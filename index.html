@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Chosen Palette: Warm Neutrals -->
-    <!-- Application Structure Plan: La aplicación se estructura como una SPA con navegación superior fija para un acceso rápido a las secciones: 'Inicio' (resumen e impacto visual), 'Trayectoria' (línea de tiempo interactiva), 'Habilidades' (visualización de datos con filtros) y 'Análisis' (fortalezas clave). Esta arquitectura no lineal fue elegida para permitir que un usuario, como un reclutador, pueda ir directamente a la información más relevante para él, mejorando la usabilidad. Las interacciones clave son la expansión de detalles en la trayectoria y el filtrado de habilidades, diseñadas para presentar información compleja de forma progresiva y digerible. -->
+    <!-- Application Structure Plan: La aplicación se estructura como una SPA con navegación superior fija para un acceso rápido a las secciones: 'Inicio' (resumen e impacto visual), 'Trayectoria' (línea de tiempo interactiva), 'Habilidades' (visualización de datos con filtros) y 'Análisis' (fortalezas clave). Esta arquitectura no lineal fue elegida para permitir que un usuario, como un reclutador, pueda ir directamente a la información más relevante para él, mejorando la usabilidad. Las interacciones clave son la expansión de detalles en la trayectoria y el filtrado de habilidades, diseñadas para presentar información compleja de forma progresiva y digerible. Se añade un selector de idioma para alternar dinámicamente el contenido entre español e inglés sin recargar la página. -->
     <!-- Visualization & Content Choices: 1. Trayectoria Profesional -> Goal: Mostrar evolución -> Method: Línea de tiempo vertical con tarjetas expandibles (HTML/CSS/JS). Interaction: Clic para expandir/contraer. Justification: Presenta una larga carrera de forma compacta, permitiendo al usuario profundizar a demanda. 2. Habilidades Técnicas -> Goal: Comparar y Organizar -> Method: Gráfico de barras horizontales (Chart.js) y un gráfico de área polar para bases de datos. Interaction: Botones de filtro que cambian la visualización. Justification: Permite una comparación visual clara de la competencia en diversas tecnologías, evitando la sobrecarga de información. El gráfico polar se usa para representar la experiencia en bases de datos de forma visualmente atractiva. 3. Fortalezas Clave -> Goal: Informar/Sintetizar -> Method: Tarjetas con iconos (HTML/Unicode). Interaction: Efecto hover sutil. Justification: Destaca las habilidades blandas y temas de carrera de forma visualmente atractiva y fácil de escanear. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
@@ -77,6 +77,9 @@
         .timeline-item.expanded .chevron {
             transform: rotate(180deg);
         }
+        .lang-button {
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -87,22 +90,28 @@
                 <span class="text-[#D4A373]">J</span>M<span class="text-[#D4A373]">E</span>N
             </div>
             <div class="hidden md:flex space-x-8">
-                <a href="#inicio" class="nav-link active text-gray-600 hover:text-gray-900 font-medium">Inicio</a>
-                <a href="#trayectoria" class="nav-link text-gray-600 hover:text-gray-900 font-medium">Trayectoria</a>
-                <a href="#habilidades" class="nav-link text-gray-600 hover:text-gray-900 font-medium">Habilidades</a>
-                <a href="#analisis" class="nav-link text-gray-600 hover:text-gray-900 font-medium">Análisis</a>
+                <a href="#inicio" class="nav-link active text-gray-600 hover:text-gray-900 font-medium" data-lang-key="nav.home">Inicio</a>
+                <a href="#trayectoria" class="nav-link text-gray-600 hover:text-gray-900 font-medium" data-lang-key="nav.career">Trayectoria</a>
+                <a href="#habilidades" class="nav-link text-gray-600 hover:text-gray-900 font-medium" data-lang-key="nav.skills">Habilidades</a>
+                <a href="#analisis" class="nav-link text-gray-600 hover:text-gray-900 font-medium" data-lang-key="nav.analysis">Análisis</a>
             </div>
-            <div class="md:hidden">
-                <button id="menu-btn" class="text-gray-600 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </button>
+            <div class="flex items-center space-x-4">
+                <div class="text-sm font-semibold flex items-center bg-gray-100 p-1 rounded-full">
+                    <button id="lang-es" class="lang-button px-3 py-1 rounded-full bg-[#D4A373] text-white">ES</button>
+                    <button id="lang-en" class="lang-button px-3 py-1 rounded-full text-gray-500 hover:bg-gray-200">EN</button>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-gray-600 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                </div>
             </div>
         </nav>
         <div id="mobile-menu" class="md:hidden hidden px-6 pb-4 space-y-2">
-            <a href="#inicio" class="block nav-link-mobile text-gray-600 hover:text-gray-900">Inicio</a>
-            <a href="#trayectoria" class="block nav-link-mobile text-gray-600 hover:text-gray-900">Trayectoria</a>
-            <a href="#habilidades" class="block nav-link-mobile text-gray-600 hover:text-gray-900">Habilidades</a>
-            <a href="#analisis" class="block nav-link-mobile text-gray-600 hover:text-gray-900">Análisis</a>
+            <a href="#inicio" class="block nav-link-mobile text-gray-600 hover:text-gray-900" data-lang-key="nav.home">Inicio</a>
+            <a href="#trayectoria" class="block nav-link-mobile text-gray-600 hover:text-gray-900" data-lang-key="nav.career">Trayectoria</a>
+            <a href="#habilidades" class="block nav-link-mobile text-gray-600 hover:text-gray-900" data-lang-key="nav.skills">Habilidades</a>
+            <a href="#analisis" class="block nav-link-mobile text-gray-600 hover:text-gray-900" data-lang-key="nav.analysis">Análisis</a>
         </div>
     </header>
 
@@ -110,41 +119,41 @@
 
         <section id="inicio" class="min-h-screen flex items-center">
             <div class="w-full">
-                <h1 class="text-5xl md:text-7xl font-bold text-gray-800 mb-4">Juan Manuel Espinoza Nevárez</h1>
-                <p class="text-xl md:text-2xl text-[#D4A373] font-semibold mb-8">Ingeniero de Software | Arquitecto Empresarial | Líder Técnico</p>
+                <h1 class="text-5xl md:text-7xl font-bold text-gray-800 mb-4" data-lang-key="intro.name">Juan Manuel Espinoza Nevárez</h1>
+                <p class="text-xl md:text-2xl text-[#D4A373] font-semibold mb-8" data-lang-key="intro.title">Ingeniero de Software | Arquitecto Empresarial | Líder Técnico</p>
                 <div class="flex flex-wrap gap-x-6 gap-y-2 mb-8">
                     <a href="mailto:juanmespinoza@gmail.com" class="flex items-center gap-2 text-gray-600 hover:text-[#D4A373] transition-colors">
                         <i class="fas fa-envelope"></i>
-                        <span>juanmespinoza@gmail.com</span>
+                        <span data-lang-key="contact.email">juanmespinoza@gmail.com</span>
                     </a>
                     <a href="https://wa.me/528110416872" target="_blank" class="flex items-center gap-2 text-gray-600 hover:text-[#D4A373] transition-colors">
                         <i class="fab fa-whatsapp"></i>
-                        <span>+52 8110 416872</span>
+                        <span data-lang-key="contact.phone">+52 8110 416872</span>
                     </a>
                 </div>
-                <p class="max-w-3xl text-lg text-gray-600 mb-10">
+                <p class="max-w-3xl text-lg text-gray-600 mb-10" data-lang-key="intro.summary">
                     Ingeniero en sistemas con casi dos décadas de experiencia en la progresión desde el desarrollo de software hasta el liderazgo técnico y la arquitectura empresarial. Mi carrera se define por la resolución de problemas complejos, la gestión de equipos y un enfoque en la escalabilidad, el rendimiento y la fiabilidad de las soluciones tecnológicas.
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl">
                     <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#D4A373]">
                         <h3 class="text-3xl font-bold text-gray-800">17+</h3>
-                        <p class="text-gray-500">Años de Experiencia</p>
+                        <p class="text-gray-500" data-lang-key="intro.exp">Años de Experiencia</p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#D4A373]">
                         <h3 class="text-3xl font-bold text-gray-800">70+</h3>
-                        <p class="text-gray-500">Empresas Apoyadas</p>
+                        <p class="text-gray-500" data-lang-key="intro.companies">Empresas Apoyadas</p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#D4A373]">
                         <h3 class="text-3xl font-bold text-gray-800">L4</h3>
-                        <p class="text-gray-500">Nivel de Soporte Técnico</p>
+                        <p class="text-gray-500" data-lang-key="intro.level">Nivel de Soporte Técnico</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="trayectoria" class="py-20">
-            <h2 class="text-4xl font-bold text-center mb-4 text-gray-800">Trayectoria Profesional</h2>
-            <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-16">
+            <h2 class="text-4xl font-bold text-center mb-4 text-gray-800" data-lang-key="career.title">Trayectoria Profesional</h2>
+            <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-16" data-lang-key="career.subtitle">
                 Un recorrido por los roles clave que han definido mi carrera, mostrando una evolución desde el desarrollo técnico hasta el liderazgo estratégico y la gestión de operaciones críticas. Haz clic en cada puesto para ver los detalles.
             </p>
             <div id="timeline-container" class="relative max-w-3xl mx-auto border-l-2 border-gray-200 pl-10">
@@ -152,14 +161,14 @@
         </section>
 
         <section id="habilidades" class="py-20">
-            <h2 class="text-4xl font-bold text-center mb-4 text-gray-800">Habilidades Técnicas</h2>
-            <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-12">
+            <h2 class="text-4xl font-bold text-center mb-4 text-gray-800" data-lang-key="skills.title">Habilidades Técnicas</h2>
+            <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-12" data-lang-key="skills.subtitle">
                 Mi conjunto de herramientas tecnológicas ha evolucionado constantemente. Aquí se visualiza mi dominio en diversas áreas. Utiliza los filtros para explorar las diferentes categorías de mi stack tecnológico.
             </p>
             <div class="flex justify-center space-x-4 mb-10">
-                <button class="skill-filter-btn active bg-[#D4A373] text-white px-6 py-2 rounded-full font-semibold shadow-md" data-filter="languages">Lenguajes & Frameworks</button>
-                <button class="skill-filter-btn bg-white text-gray-700 px-6 py-2 rounded-full font-semibold shadow-md" data-filter="databases">Bases de Datos</button>
-                <button class="skill-filter-btn bg-white text-gray-700 px-6 py-2 rounded-full font-semibold shadow-md" data-filter="tools">Herramientas & Metodologías</button>
+                <button class="skill-filter-btn active bg-[#D4A373] text-white px-6 py-2 rounded-full font-semibold shadow-md" data-filter="languages" data-lang-key="skills.filter.languages">Lenguajes & Frameworks</button>
+                <button class="skill-filter-btn bg-white text-gray-700 px-6 py-2 rounded-full font-semibold shadow-md" data-filter="databases" data-lang-key="skills.filter.databases">Bases de Datos</button>
+                <button class="skill-filter-btn bg-white text-gray-700 px-6 py-2 rounded-full font-semibold shadow-md" data-filter="tools" data-lang-key="skills.filter.tools">Herramientas & Metodologías</button>
             </div>
             <div class="chart-container">
                 <canvas id="skillsChart" class=""></canvas>
@@ -167,35 +176,35 @@
         </section>
 
         <section id="analisis" class="py-20">
-            <h2 class="text-4xl font-bold text-center mb-4 text-gray-800">Análisis y Fortalezas Clave</h2>
-             <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-16">
+            <h2 class="text-4xl font-bold text-center mb-4 text-gray-800" data-lang-key="analysis.title">Análisis y Fortalezas Clave</h2>
+             <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-16" data-lang-key="analysis.subtitle">
                 Más allá de la tecnología, mi perfil se define por un conjunto de competencias estratégicas y de liderazgo que han sido fundamentales en mi carrera. Estas son las conclusiones principales del análisis de mi perfil.
             </p>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="bg-white p-8 rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
                     <div class="text-4xl mb-4 text-[#D4A373]">💡</div>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800">Solucionador de Problemas Críticos</h3>
-                    <p class="text-gray-600">Una vocación central en mi carrera. Desde roles de Triage Engineer hasta la gestión de soporte L4, mi enfoque ha sido garantizar la estabilidad y el funcionamiento óptimo de sistemas críticos, a menudo bajo alta presión.</p>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800" data-lang-key="analysis.card1.title">Solucionador de Problemas Críticos</h3>
+                    <p class="text-gray-600" data-lang-key="analysis.card1.text">Una vocación central en mi carrera. Desde roles de Triage Engineer hasta la gestión de soporte L4, mi enfoque ha sido garantizar la estabilidad y el funcionamiento óptimo de sistemas críticos, a menudo bajo alta presión.</p>
                 </div>
                 <div class="bg-white p-8 rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
                     <div class="text-4xl mb-4 text-[#D4A373]">🚀</div>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800">Evolución Estratégica de Carrera</h3>
-                    <p class="text-gray-600">Mi trayectoria no ha sido lineal, sino una diversificación deliberada desde el desarrollo puro hacia la arquitectura, las operaciones y la gestión, buscando un control integral del ciclo de vida del software.</p>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800" data-lang-key="analysis.card2.title">Evolución Estratégica de Carrera</h3>
+                    <p class="text-gray-600" data-lang-key="analysis.card2.text">Mi trayectoria no ha sido lineal, sino una diversificación deliberada desde el desarrollo puro hacia la arquitectura, las operaciones y la gestión, buscando un control integral del ciclo de vida del software.</p>
                 </div>
                 <div class="bg-white p-8 rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
                     <div class="text-4xl mb-4 text-[#D4A373]">👥</div>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800">Liderazgo Dual: Personas y Procesos</h3>
-                    <p class="text-gray-600">Combino la gestión de equipos, con un fuerte énfasis en la mentoría y el desarrollo de talento, con la optimización de procesos para asegurar la escalabilidad, el rendimiento y la fiabilidad de los sistemas.</p>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800" data-lang-key="analysis.card3.title">Liderazgo Dual: Personas y Procesos</h3>
+                    <p class="text-gray-600" data-lang-key="analysis.card3.text">Combino la gestión de equipos, con un fuerte énfasis en la mentoría y el desarrollo de talento, con la optimización de procesos para asegurar la escalabilidad, el rendimiento y la fiabilidad de los sistemas.</p>
                 </div>
                  <div class="bg-white p-8 rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
                     <div class="text-4xl mb-4 text-[#D4A373]">🔄</div>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800">Adaptabilidad Tecnológica Continua</h3>
-                    <p class="text-gray-600">Demuestro un aprendizaje constante, evolucionando desde tecnologías consolidadas como Java EE hacia frameworks modernos (Spring Boot, React) y herramientas de monitoreo en la nube (Azure, Splunk).</p>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800" data-lang-key="analysis.card4.title">Adaptabilidad Tecnológica Continua</h3>
+                    <p class="text-gray-600" data-lang-key="analysis.card4.text">Demuestro un aprendizaje constante, evolucionando desde tecnologías consolidadas como Java EE hacia frameworks modernos (Spring Boot, React) y herramientas de monitoreo en la nube (Azure, Splunk).</p>
                 </div>
                 <div class="bg-white p-8 rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
                     <div class="text-4xl mb-4 text-[#D4A373]">🔗</div>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800">Visión Holística: del Código a la Estrategia</h3>
-                    <p class="text-gray-600">Mi experiencia como Arquitecto Empresarial (TOGAF, Archimate) me otorga una perspectiva que conecta las decisiones técnicas con los objetivos de negocio, garantizando la alineación y el gobierno de TI.</p>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800" data-lang-key="analysis.card5.title">Visión Holística: del Código a la Estrategia</h3>
+                    <p class="text-gray-600" data-lang-key="analysis.card5.text">Mi experiencia como Arquitecto Empresarial (TOGAF, Archimate) me otorga una perspectiva que conecta las decisiones técnicas con los objetivos de negocio, garantizando la alineación y el gobierno de TI.</p>
                 </div>
             </div>
         </section>
@@ -204,165 +213,484 @@
 
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-6 text-center">
-            <p>&copy; <span id="current-year"></span> Juan Manuel Espinoza Nevarez. Perfil Interactivo.</p>
-            <p class="text-sm text-gray-400 mt-2">Generado como una visualización interactiva de mi carrera profesional.</p>
+            <p><span data-lang-key="footer.copyright">&copy; <span id="current-year"></span> Juan Manuel Espinoza Nevarez. Perfil Interactivo.</span></p>
+            <p class="text-sm text-gray-400 mt-2" data-lang-key="footer.message">Generado como una visualización interactiva de mi carrera profesional.</p>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-
-            const timelineData = [
-                {
-                    period: 'Ene 2025 – Presente',
-                    role: 'Supervisor de soporte de aplicaciones de comercio exterior',
-                    company: 'American Industries',
-                    summary: 'Supervisión y gestión de aplicaciones críticas para el comercio exterior, asegurando la continuidad operativa de 70 empresas bajo el esquema de shelter.',
-                    details: `
-                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                            <li>Asegurar la correcta operación de aplicaciones críticas para el proceso de cruce de aduanas.</li>
-                            <li>Manejo y administración de la plataforma de Anexo 24 ZOE.</li>
-                            <li>Brindar soporte a usuarios de aplicaciones y macros necesarias para la operación.</li>
-                            <li>Apoyo a alrededor de 70 empresas bajo el esquema de shelter para sus operaciones de importación y exportación.</li>
-                            <li>Administración del proyecto de desarrollo y mejora de la plataforma TCS.</li>
-                            <li>Administración de GitLab, Docker y servicios de la plataforma en Ruby on Rails, Angular y Postgresql.</li>
-                        </ul>
-                    `
+            // Language data structure
+            const langData = {
+                es: {
+                    nav: {
+                        home: 'Inicio',
+                        career: 'Trayectoria',
+                        skills: 'Habilidades',
+                        analysis: 'Análisis'
+                    },
+                    intro: {
+                        name: 'Juan Manuel Espinoza Nevárez',
+                        title: 'Ingeniero de Software | Arquitecto Empresarial | Líder Técnico',
+                        summary: 'Ingeniero en sistemas con casi dos décadas de experiencia en la progresión desde el desarrollo de software hasta el liderazgo técnico y la arquitectura empresarial. Mi carrera se define por la resolución de problemas complejos, la gestión de equipos y un enfoque en la escalabilidad, el rendimiento y la fiabilidad de las soluciones tecnológicas.',
+                        exp: 'Años de Experiencia',
+                        companies: 'Empresas Apoyadas',
+                        level: 'Nivel de Soporte Técnico'
+                    },
+                    contact: {
+                         email: 'juanmespinoza@gmail.com',
+                         phone: '+52 8110 416872'
+                    },
+                    career: {
+                        title: 'Trayectoria Profesional',
+                        subtitle: 'Un recorrido por los roles clave que han definido mi carrera, mostrando una evolución desde el desarrollo técnico hasta el liderazgo estratégico y la gestión de operaciones críticas. Haz clic en cada puesto para ver los detalles.',
+                        timeline: [
+                            {
+                                period: 'Ene 2025 – Presente',
+                                role: 'Supervisor de soporte de aplicaciones de comercio exterior',
+                                company: 'American Industries',
+                                summary: 'Supervisión y gestión de aplicaciones críticas para el comercio exterior, asegurando la continuidad operativa de 70 empresas bajo el esquema de shelter.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Lideré la gestión y supervisión de sistemas de información comercial y aduanera, garantizando la continuidad de las operaciones para más de 70 empresas.</li>
+                                        <li>Administré y optimicé el proyecto de desarrollo de la plataforma TCS, enfocado en el comercio exterior.</li>
+                                        <li>Supervisé el uso y soporte de herramientas clave como GitLab, Docker, y la plataforma tecnológica basada en Ruby on Rails, Angular y Postgresql.</li>
+                                        <li>Aseguré la correcta operación de aplicaciones críticas para los procesos de aduana, incluyendo la gestión de Anexo 24 ZOE.</li>
+                                        <li>Desarrollé y supervisé estrategias para mejorar la eficiencia del soporte a usuarios y la resolución de incidentes.</li>
+                                    </ul>
+                                `
+                            },
+                            {
+                                period: 'May 2023 – Abr 2024',
+                                role: 'Software Engineering Manager / Business Consulting IV',
+                                company: 'DXC Technology',
+                                summary: 'Gestión de ingeniería de software, optimización de procesos Agile y garantía de la fiabilidad de sistemas complejos.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Gestioné un equipo de ingeniería de software, dirigiendo proyectos y asegurando que se cumplieran los objetivos de negocio.</li>
+                                        <li>Implementé metodologías Agile para optimizar los procesos de desarrollo, mejorando la eficiencia y la colaboración del equipo.</li>
+                                        <li>Resolví problemas técnicos complejos en tiempo real (SQL, Java, JavaScript, HTML5), minimizando el tiempo de inactividad de las aplicaciones.</li>
+                                        <li>Colaboré estrechamente con los stakeholders para definir el alcance, los requisitos y los entregables del proyecto, asegurando la alineación con las metas de la empresa.</li>
+                                        <li>Analicé el rendimiento del sistema y apliqué correcciones para asegurar la fiabilidad, rendimiento y escalabilidad de las soluciones.</li>
+                                    </ul>
+                                `
+                            },
+                            {
+                                period: 'Oct 2019 – Ene 2023',
+                                role: 'PHP Developer / Triage Engineer',
+                                company: 'Concentrix Catalyst (Asignado a Honeywell/T-mobile)',
+                                summary: 'Combinación de desarrollo y soporte, asegurando el "UpTime" de sistemas críticos con monitoreo proactivo.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Fui responsable del monitoreo y análisis proactivo de incidencias para asegurar el control y la fiabilidad del sistema.</li>
+                                        <li>Utilicé herramientas de monitoreo de vanguardia como Splunk, AppDynamics, Grafana y Azure para identificar y solucionar problemas en tiempo real.</li>
+                                        <li>Realicé la integración de middleware PHP entre los sistemas BigCommerce y Visual ERP.</li>
+                                        <li>Proporcioné soporte de ServiceNow, resolviendo tickets de alta prioridad y escalando problemas a los equipos de desarrollo.</li>
+                                        <li>Desarrollé y mantuve aplicaciones en Java 8 con Spring y Spring Boot, optimizando su rendimiento y funcionalidad.</li>
+                                    </ul>
+                                `
+                            },
+                            {
+                                period: 'Nov 2018 – Sep 2019',
+                                role: 'Desarrollador Sr',
+                                company: 'Dresden Partners (Asignado a HCL/Nokia)',
+                                summary: 'Desarrollo de herramientas y flujos de trabajo en un sistema propietario de Nokia.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Desarrollé herramientas personalizadas para los proyectos de Nokia, utilizando tecnologías como RhinoJS, HTML, JSON y WebServices.</li>
+                                        <li>Implementé flujos de trabajo complejos basados en la documentación, asegurando que las soluciones cumplieran con los requisitos.</li>
+                                        <li>Trabajé de la mano con el equipo de QA para garantizar la calidad del software y una ejecución sin errores.</li>
+                                        <li>Mantuve y optimicé bases de datos Oracle y MariaDB en el entorno de desarrollo.</li>
+                                    </ul>
+                                `
+                            },
+                            {
+                                period: 'Nov 2015 – Nov 2018',
+                                role: 'Arquitecto Empresarial / Lead Enterprise Architect',
+                                company: 'Softnet Soluciones (Asignado a Femsa Comercio)',
+                                summary: 'Rol estratégico de alto nivel, definiendo y controlando estándares de arquitectura para una gran corporación.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Lideré la definición y el control de los estándares de arquitectura para FEMSA Comercio.</li>
+                                        <li>Utilicé marcos de trabajo líderes en la industria como TOGAF, Archimate 2.0 y Enterprise Architect para guiar el diseño y la implementación.</li>
+                                        <li>Gestioné el proyecto de arquitectura empresarial, asegurando la alineación entre la estrategia tecnológica y los objetivos de negocio.</li>
+                                        <li>Implementé sistemas para la generación y el seguimiento de KPIs, lo que permitió una medición objetiva del progreso y el impacto de la arquitectura.</li>
+                                        <li>Supervisé un equipo de hasta 50 colaboradores, fomentando la colaboración y la adherencia a los estándares de arquitectura.</li>
+                                    </ul>
+                                `
+                            },
+                            {
+                                period: 'Abr 2013 – Nov 2015',
+                                role: 'Desarrollador Java/PHP',
+                                company: 'Softnet Soluciones (Asignado a Qualitypost)',
+                                summary: 'Mantenimiento de la aplicación NPOS y desarrollo de soluciones logísticas a nivel nacional.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Lideré la gestión y supervisión de sistemas de información comercial y aduanera, garantizando la continuidad de las operaciones para más de 70 empresas.</li>
+                                        <li>Participé en el desarrollo de aplicaciones web en PHP y Oracle 10g para optimizar los procesos de envío y recolección a nivel nacional.</li>
+                                        <li>Mantuve y mejoré la aplicación NPOS, un sistema crítico de gestión logística, utilizando tecnologías como Java, Struts, Hibernate y DB2.</li>
+                                        <li>Desarrollé servicios web para la integración con sistemas de terceros, mejorando la interoperabilidad de la plataforma.</li>
+                                        <li>Contribuí a la optimización de la logística automatizada, incluyendo la integración con la plataforma Formiik vía servicios web REST.</li>
+                                    </ul>
+                                `
+                            },
+                            {
+                                period: 'Oct 2010 – Abr 2013',
+                                role: 'Líder de Desarrolladores Java',
+                                company: 'Grupo Empresarial EISEI',
+                                summary: 'Paso fundamental hacia el liderazgo, gestionando equipos para clientes como OXXO y FAMSA.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Gestioné y lideré un equipo de desarrollo de hasta 12 personas, coordinando proyectos para clientes de alto perfil como OXXO y FAMSA.</li>
+                                        <li>Implementé la planificación de proyectos basada en recursos y tiempos de entrega, asegurando el cumplimiento de los plazos.</li>
+                                        <li>Definí y documenté el proceso de despliegue y control de entrega de proyectos, estandarizando las operaciones del equipo.</li>
+                                        <li>Apoyé en el proceso de reclutamiento y selección como experto técnico, evaluando las habilidades de los candidatos.</li>
+                                        <li>Dirigí el desarrollo de soluciones utilizando tecnologías Java, como OAS Oracle, Oracle 10g, Struts, JSP, jQuery, JDBC y Servlets.</li>
+                                    </ul>
+                                `
+                            },
+                            {
+                                period: 'Oct 2009 – Feb 2010',
+                                role: 'Desarrollador Web',
+                                company: 'Exosfera.com',
+                                summary: 'Experiencia en desarrollo web con PHP y MySQL, enfocado en maquetación y mantenimiento.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Desarrollé y mantuve sitios web utilizando PHP y MySQL, implementando funcionalidades de back-end y conexiones a bases de datos.</li>
+                                        <li>Realicé la maquetación y el desarrollo frontend con HTML, CSS, JavaScript, jQuery y Bootstrap, asegurando la compatibilidad entre navegadores.</li>
+                                        <li>Colaboré con diseñadores para crear sitios web visualmente atractivos.</li>
+                                    </ul>
+                                `
+                            },
+                            {
+                                period: 'Jul 2007 – Oct 2009',
+                                role: 'Desarrollador Java',
+                                company: 'UACH',
+                                summary: 'Desarrollo de aplicaciones web internas y administración de bases de datos PostgreSQL.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Desarrollé aplicaciones Java para cumplir con los requisitos del negocio, mejorando la experiencia del usuario y optimizando el código.</li>
+                                        <li>Diseñé e implementé esquemas de bases de datos eficientes para el almacenamiento y recuperación de datos.</li>
+                                        <li>Colaboré en la solución de problemas de producción, proporcionando soluciones rápidas para minimizar el tiempo de inactividad.</li>
+                                        <li>Participé en todas las etapas del ciclo de vida del desarrollo de software, desde la definición de requisitos hasta el despliegue.</li>
+                                    </ul>
+                                `
+                            }
+                        ]
+                    },
+                    skills: {
+                        title: 'Habilidades Técnicas',
+                        subtitle: 'Mi conjunto de herramientas tecnológicas ha evolucionado constantemente. Aquí se visualiza mi dominio en diversas áreas. Utiliza los filtros para explorar las diferentes categorías de mi stack tecnológico.',
+                        filter: {
+                            languages: 'Lenguajes & Frameworks',
+                            databases: 'Bases de Datos',
+                            tools: 'Herramientas & Metodologías'
+                        },
+                        chart: {
+                            languagesTitle: 'Nivel de Experiencia en Lenguajes y Frameworks',
+                            databasesTitle: 'Dominio en Bases de Datos',
+                            toolsTitle: 'Competencia en Herramientas y Metodologías',
+                            label: 'Nivel de Experiencia (escala 1-10)'
+                        }
+                    },
+                    analysis: {
+                        title: 'Análisis y Fortalezas Clave',
+                        subtitle: 'Más allá de la tecnología, mi perfil se define por un conjunto de competencias estratégicas y de liderazgo que han sido fundamentales en mi carrera. Estas son las conclusiones principales del análisis de mi perfil.',
+                        card1: {
+                            title: 'Solucionador de Problemas Críticos',
+                            text: 'Una vocación central en mi carrera. Desde roles de Triage Engineer hasta la gestión de soporte L4, mi enfoque ha sido garantizar la estabilidad y el funcionamiento óptimo de sistemas críticos, a menudo bajo alta presión.'
+                        },
+                        card2: {
+                            title: 'Evolución Estratégica de Carrera',
+                            text: 'Mi trayectoria no ha sido lineal, sino una diversificación deliberada desde el desarrollo puro hacia la arquitectura, las operaciones y la gestión, buscando un control integral del ciclo de vida del software.'
+                        },
+                        card3: {
+                            title: 'Liderazgo Dual: Personas y Procesos',
+                            text: 'Combino la gestión de equipos, con un fuerte énfasis en la mentoría y el desarrollo de talento, con la optimización de procesos para asegurar la escalabilidad, el rendimiento y la fiabilidad de los sistemas.'
+                        },
+                        card4: {
+                            title: 'Adaptabilidad Tecnológica Continua',
+                            text: 'Demuestro un aprendizaje constante, evolucionando desde tecnologías consolidadas como Java EE hacia frameworks modernos (Spring Boot, React) y herramientas de monitoreo en la nube (Azure, Splunk).'
+                        },
+                        card5: {
+                            title: 'Visión Holística: del Código a la Estrategia',
+                            text: 'Mi experiencia como Arquitecto Empresarial (TOGAF, Archimate) me otorga una perspectiva que conecta las decisiones técnicas con los objetivos de negocio, garantizando la alineación y el gobierno de TI.'
+                        }
+                    },
+                    footer: {
+                        copyright: '&copy; <span id="current-year"></span> Juan Manuel Espinoza Nevarez. Perfil Interactivo.',
+                        message: 'Generado como una visualización interactiva de mi carrera profesional.'
+                    }
                 },
-                {
-                    period: 'May 2023 – Abr 2024',
-                    role: 'Software Engineering Manager / Business Consulting IV',
-                    company: 'DXC Technology',
-                    summary: 'Gestión de ingeniería de software, optimización de procesos Agile y garantía de la fiabilidad de sistemas complejos.',
-                    details: `
-                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                            <li>Colaboración con product owners para definir el alcance y los requisitos del proyecto.</li>
-                            <li>Implementación de metodologías Agile para optimizar los procesos de desarrollo.</li>
-                            <li>Gestión de tickets de incidentes y resolución proactiva de problemas técnicos (SQL, Java, JavaScript, HTML5).</li>
-                            <li>Rastreo de causas raíz de fallos y documentación para asegurar el rendimiento óptimo del sistema.</li>
-                        </ul>
-                    `
-                },
-                {
-                    period: 'Oct 2019 – Ene 2023',
-                    role: 'PHP Developer / Triage Engineer',
-                    company: 'Concentrix Catalyst (Asignado a Honeywell/T-mobile)',
-                    summary: 'Combinación de desarrollo y soporte, asegurando el "UpTime" de sistemas críticos con monitoreo proactivo.',
-                    details: `
-                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                            <li>Integración de middleware PHP entre BigCommerce y Visual ERP.</li>
-                            <li>Mantenimiento de aplicaciones en Java 8 con Spring y Spring Boot.</li>
-                            <li>Monitoreo y análisis para el control de incidencias usando Splunk, AppDynamics, Grafana y Azure.</li>
-                            <li>Desarrollo de KPIs y Dashboards para mejorar el monitoreo y evaluación de riesgos en tiempo real.</li>
-                        </ul>
-                    `
-                },
-                {
-                    period: 'Nov 2018 – Sep 2019',
-                    role: 'Desarrollador Sr',
-                    company: 'Dresden Partners (Asignado a HCL/Nokia)',
-                    summary: 'Desarrollo de herramientas y flujos de trabajo en un sistema propietario de Nokia.',
-                    details: `
-                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                            <li>Aplicación de tecnologías como RhinoJS, HTML, JSON, Hibernate, Oracle, MariaDB y WebServices.</li>
-                            <li>Colaboración estrecha con equipos de QA para asegurar la calidad y correcta ejecución del software.</li>
-                        </ul>
-                    `
-                },
-                {
-                    period: 'Nov 2015 – Nov 2018',
-                    role: 'Arquitecto Empresarial / Lead Enterprise Architect',
-                    company: 'Softnet Soluciones (Asignado a Femsa Comercio)',
-                    summary: 'Rol estratégico de alto nivel, definiendo y controlando estándares de arquitectura para una gran corporación.',
-                    details: `
-                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                            <li>Uso de marcos de trabajo como TOGAF, Archimate 2.0 y Enterprise Architect.</li>
-                            <li>Gestión de proyectos de arquitectura, capacidad de componentes y seguimiento de KPIs.</li>
-                            <li>Liderazgo de hasta 50 colaboradores, asegurando la alineación tecnológica con los objetivos de negocio.</li>
-                        </ul>
-                    `
-                },
-                {
-                    period: 'Abr 2013 – Nov 2015',
-                    role: 'Desarrollador Java/PHP',
-                    company: 'Softnet Soluciones (Asignado a Qualitypost)',
-                    summary: 'Mantenimiento de la aplicación NPOS y desarrollo de soluciones logísticas a nivel nacional.',
-                    details: `
-                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                            <li>Mantenimiento de NPOS (Java, Struts, Hibernate, DB2).</li>
-                            <li>Desarrollo de aplicaciones web en PHP y Oracle para controlar la logística nacional de envío y recolección.</li>
-                            <li>Optimización de la logística automatizada, incluyendo la integración con la plataforma Formiik vía servicios Web REST.</li>
-                        </ul>
-                    `
-                },
-                {
-                    period: 'Oct 2010 – Abr 2013',
-                    role: 'Líder de Desarrolladores Java',
-                    company: 'Grupo Empresarial EISEI',
-                    summary: 'Paso fundamental hacia el liderazgo, gestionando equipos para clientes como OXXO y FAMSA.',
-                    details: `
-                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                            <li>Gestión de equipos de hasta 12 personas.</li>
-                            <li>Planeación de proyectos, control de entregas, documentación y proceso de despliegue.</li>
-                            <li>Apoyo en reclutamiento como experto técnico.</li>
-                            <li>Desarrollo con OAS Oracle, Oracle 10g, Struts, JSP, jQuery, JDBC, Servlets y BC4J.</li>
-                        </ul>
-                    `
-                },
-                {
-                    period: 'Oct 2009 – Feb 2010',
-                    role: 'Desarrollador Web',
-                    company: 'Exosfera.com',
-                    summary: 'Experiencia en desarrollo web con PHP y MySQL, enfocado en maquetación y mantenimiento.',
-                    details: `
-                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                            <li>Desarrollo con PHP y MySQL.</li>
-                            <li>Maquetación de páginas con HTML, CSS, JavaScript, jQuery y Bootstrap.</li>
-                        </ul>
-                    `
-                },
-                {
-                    period: 'Jul 2007 – Oct 2009',
-                    role: 'Desarrollador Java',
-                    company: 'UACH',
-                    summary: 'Desarrollo de aplicaciones web internas y administración de bases de datos PostgreSQL.',
-                    details: `
-                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                            <li>Desarrollo con Struts, Hibernate, jQuery, Mod-Perl, PHP y JavaScript.</li>
-                            <li>Diseño y administración de bases de datos PostgreSQL para proyectos internos.</li>
-                        </ul>
-                    `
+                en: {
+                    nav: {
+                        home: 'Home',
+                        career: 'Career',
+                        skills: 'Skills',
+                        analysis: 'Analysis'
+                    },
+                    intro: {
+                        name: 'Juan Manuel Espinoza Nevarez',
+                        title: 'Software Engineer | Enterprise Architect | Technical Lead',
+                        summary: 'A systems engineer with nearly two decades of experience progressing from software development to technical leadership and enterprise architecture. My career is defined by solving complex problems, managing teams, and focusing on the scalability, performance, and reliability of technological solutions.',
+                        exp: 'Years of Experience',
+                        companies: 'Companies Supported',
+                        level: 'Technical Support Level'
+                    },
+                    contact: {
+                         email: 'juanmespinoza@gmail.com',
+                         phone: '+52 8110 416872'
+                    },
+                    career: {
+                        title: 'Professional Journey',
+                        subtitle: 'A journey through the key roles that have defined my career, showing an evolution from technical development to strategic leadership and management of critical operations. Click on each position to see the details.',
+                        timeline: [
+                             {
+                                period: 'Jan 2025 – Present',
+                                role: 'Foreign Trade Applications Support Supervisor',
+                                company: 'American Industries',
+                                summary: 'Supervision and management of critical foreign trade applications, ensuring operational continuity for 70 companies under the shelter scheme.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Led the management and supervision of commercial and customs information systems, ensuring the continuity of operations for over 70 companies.</li>
+                                        <li>Managed and optimized the development project for the TCS platform, focused on foreign trade.</li>
+                                        <li>Oversaw the use and support of key tools such as GitLab, Docker, and the technology platform based on Ruby on Rails, Angular, and Postgresql.</li>
+                                        <li>Ensured the correct operation of critical applications for customs processes, including the management of Annex 24 ZOE.</li>
+                                        <li>Developed and supervised strategies to improve the efficiency of user support and incident resolution.</li>
+                                    </ul>
+                                `
+                            },
+                            {
+                                period: 'May 2023 – Apr 2024',
+                                role: 'Software Engineering Manager / Business Consulting IV',
+                                company: 'DXC Technology',
+                                summary: 'Software engineering management, Agile process optimization, and ensuring the reliability of complex systems.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Managed a software engineering team, leading projects and ensuring business objectives were met.</li>
+                                        <li>Implemented Agile methodologies to optimize development processes, improving team efficiency and collaboration.</li>
+                                        <li>Resolved complex technical issues in real-time (SQL, Java, JavaScript, HTML5), minimizing application downtime.</li>
+                                        <li>Collaborated closely with stakeholders to define project scope, requirements, and deliverables, ensuring alignment with company goals.</li>
+                                        <li>Analyzed system performance and applied fixes to ensure the reliability, performance, and scalability of solutions.</li>
+                                    </ul>
+                                `
+                            },
+                            {
+                                period: 'Oct 2019 – Jan 2023',
+                                role: 'PHP Developer / Triage Engineer',
+                                company: 'Concentrix Catalyst (Assigned to Honeywell/T-mobile)',
+                                summary: 'Combined development and support, ensuring the "UpTime" of critical systems with proactive monitoring.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>I was responsible for proactive monitoring and analysis of incidents to ensure system control and reliability.</li>
+                                        <li>Used cutting-edge monitoring tools like Splunk, AppDynamics, Grafana, and Azure to identify and resolve issues in real-time.</li>
+                                        <li>Performed PHP middleware integration between BigCommerce and Visual ERP systems.</li>
+                                        <li>Provided ServiceNow support, resolving high-priority tickets and escalating problems to development teams.</li>
+                                        <li>Developed and maintained applications in Java 8 with Spring and Spring Boot, optimizing their performance and functionality.</li>
+                                    </ul>
+                                `
+                            },
+                            {
+                                period: 'Nov 2018 – Sep 2019',
+                                role: 'Sr. Developer',
+                                company: 'Dresden Partners (Assigned to HCL/Nokia)',
+                                summary: 'Development of tools and workflows in a proprietary Nokia system.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Developed custom tools for Nokia projects, using technologies such as RhinoJS, HTML, JSON, and WebServices.</li>
+                                        <li>Implemented complex workflows based on documentation, ensuring solutions met requirements.</li>
+                                        <li>Worked hand in hand with the QA team to ensure software quality and correct execution.</li>
+                                        <li>Maintained and optimized Oracle and MariaDB databases in the development environment.</li>
+                                    </ul>
+                                `
+                            },
+                            {
+                                period: 'Nov 2015 – Nov 2018',
+                                role: 'Enterprise Architect / Lead Enterprise Architect',
+                                company: 'Softnet Soluciones (Assigned to Femsa Comercio)',
+                                summary: 'High-level strategic role, defining and controlling architecture standards for a large corporation.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Led the definition and control of architecture standards for FEMSA Comercio.</li>
+                                        <li>Used industry-leading frameworks like TOGAF, Archimate 2.0, and Enterprise Architect to guide design and implementation.</li>
+                                        <li>Managed the enterprise architecture project, ensuring alignment between technology strategy and business objectives.</li>
+                                        <li>Implemented systems for KPI generation and tracking, allowing for objective measurement of architecture progress and impact.</li>
+                                        <li>Supervised a team of up to 50 collaborators, fostering collaboration and adherence to architecture standards.</li>
+                                    </ul>
+                                `
+                            },
+                            {
+                                period: 'Apr 2013 – Nov 2015',
+                                role: 'Java/PHP Developer',
+                                company: 'Softnet Soluciones (Assigned to Qualitypost)',
+                                summary: 'Maintenance of the NPOS application and development of national logistics solutions.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Led the management and supervision of commercial and customs information systems, ensuring the continuity of operations for over 70 companies.</li>
+                                        <li>Participated in the development of web applications in PHP and Oracle 10g to optimize national shipping and collection processes.</li>
+                                        <li>Maintained and improved the NPOS application, a critical logistics management system, using technologies like Java, Struts, Hibernate, and DB2.</li>
+                                        <li>Developed web services for integration with third-party systems, improving platform interoperability.</li>
+                                        <li>Contributed to the optimization of automated logistics, including integration with the Formiik platform via REST web services.</li>
+                                    </ul>
+                                `
+                            },
+                            {
+                                period: 'Oct 2010 – Apr 2013',
+                                role: 'Java Developer Lead',
+                                company: 'Grupo Empresarial EISEI',
+                                summary: 'A fundamental step towards leadership, managing teams for clients like OXXO and FAMSA.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Managed and led a development team of up to 12 people, coordinating projects for high-profile clients like OXXO and FAMSA.</li>
+                                        <li>Implemented project planning based on resources and delivery times, ensuring deadlines were met.</li>
+                                        <li>Defined and documented the project deployment and delivery control process, standardizing team operations.</li>
+                                        <li>Supported the recruitment and selection process as a technical expert, evaluating candidate skills.</li>
+                                        <li>Directed the development of solutions using Java technologies, such as OAS Oracle, Oracle 10g, Struts, JSP, jQuery, JDBC, and Servlets.</li>
+                                    </ul>
+                                `
+                            },
+                            {
+                                period: 'Oct 2009 – Feb 2010',
+                                role: 'Web Developer',
+                                company: 'Exosfera.com',
+                                summary: 'Web development experience with PHP and MySQL, focused on layout and maintenance.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Developed and maintained websites using PHP and MySQL, implementing back-end functionality and database connections.</li>
+                                        <li>Performed frontend layout and development with HTML, CSS, JavaScript, jQuery, and Bootstrap, ensuring cross-browser compatibility.</li>
+                                        <li>Collaborated with designers to create visually appealing websites.</li>
+                                    </ul>
+                                `
+                            },
+                            {
+                                period: 'Jul 2007 – Oct 2009',
+                                role: 'Java Developer',
+                                company: 'UACH',
+                                summary: 'Development of internal web applications and administration of PostgreSQL databases.',
+                                details: `
+                                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                                        <li>Developed Java applications to meet business requirements, improving user experience and optimizing code.</li>
+                                        <li>Designed and implemented efficient database schemas for data storage and retrieval.</li>
+                                        <li>Collaborated on troubleshooting production issues, providing quick solutions to minimize downtime.</li>
+                                        <li>Participated in all stages of the software development lifecycle, from requirements definition to deployment.</li>
+                                    </ul>
+                                `
+                            }
+                        ]
+                    },
+                    skills: {
+                        title: 'Technical Skills',
+                        subtitle: 'My technology stack has been constantly evolving. Here is a visualization of my proficiency in various areas. Use the filters to explore the different categories of my tech stack.',
+                        filter: {
+                            languages: 'Languages & Frameworks',
+                            databases: 'Databases',
+                            tools: 'Tools & Methodologies'
+                        },
+                        chart: {
+                            languagesTitle: 'Level of Experience in Languages and Frameworks',
+                            databasesTitle: 'Proficiency in Databases',
+                            toolsTitle: 'Competence in Tools and Methodologies',
+                            label: 'Experience Level (scale 1-10)'
+                        }
+                    },
+                    analysis: {
+                        title: 'Analysis and Key Strengths',
+                        subtitle: 'Beyond technology, my profile is defined by a set of strategic and leadership competencies that have been fundamental to my career. These are the main conclusions from the analysis of my profile.',
+                        card1: {
+                            title: 'Critical Problem-Solver',
+                            text: 'A central vocation in my career. From Triage Engineer roles to L4 support management, my focus has been on ensuring the stability and optimal functioning of critical systems, often under high pressure.'
+                        },
+                        card2: {
+                            title: 'Strategic Career Evolution',
+                            text: 'My trajectory has not been linear, but a deliberate diversification from pure development towards architecture, operations, and management, seeking comprehensive control over the software lifecycle.'
+                        },
+                        card3: {
+                            title: 'Dual Leadership: People and Processes',
+                            text: 'I combine team management, with a strong emphasis on mentoring and talent development, with process optimization to ensure the scalability, performance, and reliability of systems.'
+                        },
+                        card4: {
+                            title: 'Continuous Technological Adaptability',
+                            text: 'I demonstrate constant learning, evolving from established technologies like Java EE to modern frameworks (Spring Boot, React) and cloud monitoring tools (Azure, Splunk).'
+                        },
+                        card5: {
+                            title: 'Holistic Vision: From Code to Strategy',
+                            text: 'My experience as an Enterprise Architect (TOGAF, Archimate) gives me a perspective that connects technical decisions with business objectives, ensuring IT alignment and governance.'
+                        }
+                    },
+                    footer: {
+                        copyright: '&copy; <span id="current-year"></span> Juan Manuel Espinoza Nevarez. Interactive Profile.',
+                        message: 'Generated as an interactive visualization of my professional career.'
+                    }
                 }
-            ];
+            };
 
-            const timelineContainer = document.getElementById('timeline-container');
-            timelineData.forEach(item => {
-                const timelineItem = document.createElement('div');
-                timelineItem.className = 'timeline-item mb-12 relative';
-                timelineItem.innerHTML = `
-                    <div class="card-toggle cursor-pointer bg-white p-6 rounded-lg shadow-md border-l-4 border-gray-200 hover:border-[#D4A373] transition-colors duration-300">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <p class="text-sm font-semibold text-[#D4A373] mb-1">${item.period}</p>
-                                <h3 class="text-xl font-bold text-gray-800">${item.role}</h3>
-                                <p class="text-md font-medium text-gray-600 mb-3">${item.company}</p>
-                                <p class="text-gray-500">${item.summary}</p>
-                            </div>
-                            <i class="fas fa-chevron-down text-gray-400 chevron mt-1 ml-4"></i>
-                        </div>
-                        <div class="details">
-                            ${item.details}
-                        </div>
-                    </div>
-                `;
-                timelineContainer.appendChild(timelineItem);
-            });
+            let currentLang = 'es'; // Default language
 
-            document.querySelectorAll('.card-toggle').forEach(card => {
-                card.addEventListener('click', () => {
-                    card.closest('.timeline-item').classList.toggle('expanded');
+            // Function to update the page content based on the selected language
+            function updateContent(lang) {
+                const data = langData[lang];
+                document.querySelectorAll('[data-lang-key]').forEach(element => {
+                    const key = element.dataset.langKey;
+                    const keys = key.split('.');
+                    let content = data;
+                    for (const k of keys) {
+                        content = content[k];
+                    }
+                    element.innerHTML = content;
                 });
-            });
+                updateTimeline(data.career.timeline);
+                updateChart(currentChartFilter);
+                updateLangButtons();
+                document.documentElement.lang = lang; // Update the HTML lang attribute
+            }
+
+            // Function to update the timeline content
+            function updateTimeline(timelineData) {
+                const timelineContainer = document.getElementById('timeline-container');
+                timelineContainer.innerHTML = ''; // Clear previous content
+                timelineData.forEach(item => {
+                    const timelineItem = document.createElement('div');
+                    timelineItem.className = 'timeline-item mb-12 relative';
+                    timelineItem.innerHTML = `
+                        <div class="card-toggle cursor-pointer bg-white p-6 rounded-lg shadow-md border-l-4 border-gray-200 hover:border-[#D4A373] transition-colors duration-300">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-sm font-semibold text-[#D4A373] mb-1">${item.period}</p>
+                                    <h3 class="text-xl font-bold text-gray-800">${item.role}</h3>
+                                    <p class="text-md font-medium text-gray-600 mb-3">${item.company}</p>
+                                    <p class="text-gray-500">${item.summary}</p>
+                                </div>
+                                <i class="fas fa-chevron-down text-gray-400 chevron mt-1 ml-4"></i>
+                            </div>
+                            <div class="details">
+                                ${item.details}
+                            </div>
+                        </div>
+                    `;
+                    timelineContainer.appendChild(timelineItem);
+                });
+                 // Re-attach event listeners for the new elements
+                document.querySelectorAll('.card-toggle').forEach(card => {
+                    card.addEventListener('click', () => {
+                        card.closest('.timeline-item').classList.toggle('expanded');
+                    });
+                });
+            }
+
+            // Function to update the language buttons' active state
+            function updateLangButtons() {
+                document.getElementById('lang-es').classList.remove('bg-[#D4A373]', 'text-white', 'text-gray-500', 'hover:bg-gray-200');
+                document.getElementById('lang-en').classList.remove('bg-[#D4A373]', 'text-white', 'text-gray-500', 'hover:bg-gray-200');
+
+                if (currentLang === 'es') {
+                    document.getElementById('lang-es').classList.add('bg-[#D4A373]', 'text-white');
+                    document.getElementById('lang-en').classList.add('text-gray-500', 'hover:bg-gray-200');
+                } else {
+                    document.getElementById('lang-en').classList.add('bg-[#D4A373]', 'text-white');
+                    document.getElementById('lang-es').classList.add('text-gray-500', 'hover:bg-gray-200');
+                }
+            }
+
 
             const menuBtn = document.getElementById('menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -396,35 +724,58 @@
             sections.forEach(section => observer.observe(section));
 
             const skillsData = {
-                languages: {
-                    labels: ['Java EE (Spring Boot)', 'JavaScript (React, Node)', 'PHP', 'HTML/CSS', 'SQL/PL-SQL', 'Ruby on Rails', 'Angular'],
-                    values: [10, 10, 8, 10, 9, 6, 6],
-                    title: 'Nivel de Experiencia en Lenguajes y Frameworks',
-                    backgroundColor: '#D4A373',
+                es: {
+                    languages: {
+                        labels: ['Java EE (Spring Boot)', 'JavaScript (React, Node)', 'PHP', 'HTML/CSS', 'SQL/PL-SQL', 'Ruby on Rails', 'Angular'],
+                        values: [10, 10, 8, 10, 9, 6, 6],
+                        title: 'Nivel de Experiencia en Lenguajes y Frameworks',
+                        backgroundColor: '#D4A373',
+                    },
+                    databases: {
+                        labels: ['Oracle DB', 'MariaDB/MySQL', 'PostgreSQL', 'SQL Server', 'DB2'],
+                        values: [9, 8, 8, 6, 5],
+                        title: 'Dominio en Bases de Datos',
+                        backgroundColor: ['#D4A373', '#E1C3A5', '#A27C5A', '#C2B280', '#A4936A'],
+                    },
+                    tools: {
+                        labels: ['Arquitectura (TOGAF)', 'CI/CD (Jenkins, Git)', 'Monitoreo (Splunk)', 'Agile (Scrum/Kanban)', 'Cloud (Azure)', 'GitLab', 'Docker'],
+                        values: [10, 9, 8, 9, 6, 5, 3],
+                        title: 'Competencia en Herramientas y Metodologías',
+                        backgroundColor: '#D4A373',
+                    }
                 },
-                databases: {
-                    labels: ['Oracle DB', 'MariaDB/MySQL', 'PostgreSQL', 'SQL Server', 'DB2'],
-                    values: [9, 8, 8, 6, 5],
-                    title: 'Dominio en Bases de Datos',
-                    backgroundColor: ['#D4A373', '#E1C3A5', '#A27C5A', '#C2B280', '#A4936A'],
-                },
-                tools: {
-                    labels: ['Arquitectura (TOGAF)', 'CI/CD (Jenkins, Git)', 'Monitoreo (Splunk)', 'Agile (Scrum/Kanban)', 'Cloud (Azure)', 'GitLab', 'Docker'],
-                    values: [10, 9, 8, 9, 6, 5, 3],
-                    title: 'Competencia en Herramientas y Metodologías',
-                    backgroundColor: '#D4A373',
+                en: {
+                    languages: {
+                        labels: ['Java EE (Spring Boot)', 'JavaScript (React, Node)', 'PHP', 'HTML/CSS', 'SQL/PL-SQL', 'Ruby on Rails', 'Angular'],
+                        values: [10, 10, 8, 10, 9, 6, 6],
+                        title: 'Experience Level in Languages and Frameworks',
+                        backgroundColor: '#D4A373',
+                    },
+                    databases: {
+                        labels: ['Oracle DB', 'MariaDB/MySQL', 'PostgreSQL', 'SQL Server', 'DB2'],
+                        values: [9, 8, 8, 6, 5],
+                        title: 'Proficiency in Databases',
+                        backgroundColor: ['#D4A373', '#E1C3A5', '#A27C5A', '#C2B280', '#A4936A'],
+                    },
+                    tools: {
+                        labels: ['Architecture (TOGAF)', 'CI/CD (Jenkins, Git)', 'Monitoring (Splunk)', 'Agile (Scrum/Kanban)', 'Cloud (Azure)', 'GitLab', 'Docker'],
+                        values: [10, 9, 8, 9, 6, 5, 3],
+                        title: 'Competence in Tools and Methodologies',
+                        backgroundColor: '#D4A373',
+                    }
                 }
             };
 
             const ctx = document.getElementById('skillsChart').getContext('2d');
             let skillsChart;
+            let currentChartFilter = 'languages';
 
-            function createChart(filter) {
+            function updateChart(filter) {
                 if (skillsChart) {
                     skillsChart.destroy();
                 }
 
-                const data = skillsData[filter];
+                const data = skillsData[currentLang][filter];
                 const chartType = filter === 'databases' ? 'polarArea' : 'bar';
                 const options = {
                     responsive: true,
@@ -472,7 +823,7 @@
                             beginAtZero: true,
                             max: 10,
                             ticks: { stepSize: 1 },
-                            title: { display: true, text: 'Nivel de experiencia (escala 1-10)', font: { size: 14, weight: 'bold' } }
+                            title: { display: true, text: langData[currentLang].skills.chart.label, font: { size: 14, weight: 'bold' } }
                         },
                         y: { grid: { display: false } }
                     };
@@ -484,7 +835,7 @@
                     data: {
                         labels: data.labels,
                         datasets: [{
-                            label: 'Nivel de Experiencia (escala 1-10)',
+                            label: langData[currentLang].skills.chart.label,
                             data: data.values,
                             backgroundColor: data.backgroundColor,
                             borderWidth: 1,
@@ -495,7 +846,9 @@
                 });
             }
 
-            createChart('languages');
+            // Initial setup
+            updateContent(currentLang);
+            updateChart(currentChartFilter);
 
             const filterButtons = document.querySelectorAll('.skill-filter-btn');
             filterButtons.forEach(button => {
@@ -506,8 +859,19 @@
                     });
                     button.classList.add('active', 'bg-[#D4A373]', 'text-white');
                     button.classList.remove('bg-white', 'text-gray-700');
-                    createChart(button.dataset.filter);
+                    currentChartFilter = button.dataset.filter;
+                    updateChart(currentChartFilter);
                 });
+            });
+
+            document.getElementById('lang-es').addEventListener('click', () => {
+                currentLang = 'es';
+                updateContent(currentLang);
+            });
+
+            document.getElementById('lang-en').addEventListener('click', () => {
+                currentLang = 'en';
+                updateContent(currentLang);
             });
         });
     </script>
