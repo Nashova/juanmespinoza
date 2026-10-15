@@ -1,0 +1,17 @@
+.lang-switch,
+.menu-btn,
+.chart-card,
+[data-action] {
+  display: none !important;
+}
+
+.skills-tables {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 2rem 0 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+}

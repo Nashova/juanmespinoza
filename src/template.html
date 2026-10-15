@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="{{lang}}" data-updated="{{updated}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">
+  <meta name="author" content="Juan Manuel Espinoza Nevárez">
+  <meta name="theme-color" content="#FDFBF8">
+  <link rel="canonical" href="{{canonical}}">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="Juan Manuel Espinoza Nevárez">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:url" content="{{canonical}}">
+  <meta property="og:image" content="{{ogImage}}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Juan Manuel Espinoza Nevárez — Ingeniero de Software, Arquitecto Empresarial y Líder Técnico">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{title}}">
+  <meta name="twitter:description" content="{{description}}">
+  <meta name="twitter:image" content="{{ogImage}}">
+
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/styles.css?v={{v}}">
+  <noscript><link rel="stylesheet" href="/assets/css/noscript.css?v={{v}}"></noscript>
+  <script type="application/ld+json">{{jsonld}}</script>
+  <script type="module" src="/assets/js/app.js?v={{v}}"></script>
+</head>
+<body>
+  <a href="#contenido" class="skip-link">{{skip}}</a>
+  <header id="site-header" class="sticky top-0 z-50 border-b border-black/5 bg-white/85 backdrop-blur">{{header}}</header>
+  <main id="contenido" tabindex="-1" class="mx-auto max-w-6xl px-4 sm:px-6">
+{{main}}
+  </main>
+  <footer id="site-footer" class="bg-gray-800 text-white">{{footer}}</footer>
+</body>
+</html>
