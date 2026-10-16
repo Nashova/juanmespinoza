@@ -29,10 +29,10 @@ export function formatUpdated(isoDate, lang) {
   }).format(date);
 }
 
-const SECTIONS = ['inicio', 'trayectoria', 'habilidades', 'fortalezas', 'formacion'];
+const SECTIONS = ['inicio', 'trayectoria', 'proyectos', 'habilidades', 'fortalezas', 'formacion'];
 
 export function renderHeader(c, lang) {
-  const labels = [c.ui.nav.home, c.ui.nav.career, c.ui.nav.skills, c.ui.nav.strengths, c.ui.nav.education];
+  const labels = [c.ui.nav.home, c.ui.nav.career, c.ui.nav.projects, c.ui.nav.skills, c.ui.nav.strengths, c.ui.nav.education];
   const desktop = SECTIONS.map(
     (id, i) => `<a href="#${id}" class="nav-link" data-nav="${id}">${esc(labels[i])}</a>`,
   ).join('');
@@ -46,16 +46,16 @@ export function renderHeader(c, lang) {
   return `
     <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6" aria-label="${esc(c.ui.navAria)}">
       <a href="#inicio" class="logo" aria-label="JMEN — ${esc(c.hero.name)}"><span class="text-accent-dark">J</span>M<span class="text-accent-dark">E</span>N</a>
-      <div class="hidden items-center gap-8 md:flex">${desktop}</div>
+      <div class="hidden items-center gap-6 lg:flex xl:gap-8">${desktop}</div>
       <div class="flex items-center gap-2">
         <div class="lang-switch" role="group" aria-label="${esc(c.ui.langLabel)}">${langButton('es')}${langButton('en')}</div>
-        <button type="button" id="menu-btn" class="menu-btn md:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="${esc(c.ui.menu)}" data-label-open="${esc(c.ui.menu)}" data-label-close="${esc(c.ui.closeMenu)}">
+        <button type="button" id="menu-btn" class="menu-btn lg:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="${esc(c.ui.menu)}" data-label-open="${esc(c.ui.menu)}" data-label-close="${esc(c.ui.closeMenu)}">
           <span data-menu-icon="open">${icon('bars', 'h-5 w-5')}</span>
           <span data-menu-icon="close" class="hidden">${icon('xmark', 'h-5 w-5')}</span>
         </button>
       </div>
     </nav>
-    <div id="mobile-menu" class="hidden border-t border-black/5 bg-white md:hidden">
+    <div id="mobile-menu" class="hidden border-t border-black/5 bg-white lg:hidden">
       <div class="mx-auto max-w-6xl space-y-1 px-4 py-3 sm:px-6">${mobile}</div>
     </div>`;
 }
@@ -68,7 +68,7 @@ function renderHero(c, ctx) {
     `<a class="chip" href="mailto:${esc(k.email)}">${icon('envelope')}<span>${esc(k.email)}</span></a>`,
     `<a class="chip" ${external(`https://wa.me/${k.whatsapp}`)}>${icon('whatsapp')}<span>WhatsApp ${esc(k.phoneDisplay)}</span>${sr}</a>`,
     `<a class="chip" ${external(k.linkedin)}>${icon('linkedin')}<span>LinkedIn</span>${sr}</a>`,
-    `<a class="chip" ${external(k.github)}>${icon('github')}<span>GitHub</span>${sr}</a>`,
+    k.github ? `<a class="chip" ${external(k.github)}>${icon('github')}<span>GitHub</span>${sr}</a>` : '',
   ].join('');
   const stats = c.hero.stats
     .map(
@@ -89,9 +89,9 @@ function renderHero(c, ctx) {
         <p class="hero-summary">${esc(c.hero.summary)}</p>
         <div class="mb-12 flex flex-wrap gap-3">
           <a href="#trayectoria" class="btn btn-primary">${esc(c.ui.viewCareer)}</a>
-          <button type="button" class="btn btn-secondary" data-action="print">${icon('print')}<span>${esc(c.ui.print)}</span></button>
+          <a href="${esc(c.ui.pdfHref)}" class="btn btn-secondary" download>${icon('download')}<span>${esc(c.ui.pdf)}</span></a>
         </div>
-        <div class="grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">${stats}</div>
+        <div class="stats-grid grid max-w-5xl grid-cols-2 gap-4 lg:grid-cols-4 sm:gap-6">${stats}</div>
       </div>
     </section>`;
 }
@@ -102,7 +102,7 @@ function renderCareer(c) {
       (job, i) => `
         <li class="relative">
           <span class="tl-dot" aria-hidden="true"></span>
-          <details class="tl-card"${i === 0 ? ' open' : ''}>
+          <details class="tl-card${job.printCompact ? ' tl-older' : ''}"${i === 0 ? ' open' : ''}>
             <summary class="tl-summary">
               <span class="tl-period">${esc(job.period)}</span>
               <h3 class="tl-role">${esc(job.role)}</h3>
@@ -130,6 +130,30 @@ function renderCareer(c) {
     </section>`;
 }
 
+function renderProjects(c) {
+  const p = c.projects;
+  const cards = p.items
+    .map(
+      (item) => `
+        <article class="project-card${item.featured ? ' project-featured md:col-span-2' : ''}">
+          <h3 class="project-name">${esc(item.name)}</h3>
+          <p class="project-kind">${esc(item.kind)}</p>
+          <p class="project-summary">${esc(item.summary)}</p>
+          <ul class="project-list">${item.bullets.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>
+          <ul class="stack-list" aria-label="${esc(p.stackLabel)}">${item.stack.map((s) => `<li class="stack-chip">${esc(s)}</li>`).join('')}</ul>
+        </article>`,
+    )
+    .join('');
+
+  return `
+    <section id="proyectos" class="section" aria-labelledby="projects-title">
+      <h2 id="projects-title" class="section-title">${esc(p.title)}</h2>
+      <p class="section-subtitle keep-print">${esc(p.subtitle)}</p>
+      <div class="projects-grid grid gap-6 md:grid-cols-2">${cards}</div>
+      <p class="project-note">${esc(p.note)}</p>
+    </section>`;
+}
+
 function renderSkills(c) {
   const s = c.skills;
   const buttons = Object.keys(s.filters)
@@ -149,6 +173,9 @@ function renderSkills(c) {
     )
     .join('');
   const first = Object.values(s.data)[0];
+  const summary = Object.entries(s.data)
+    .map(([key, d]) => `<p class="skills-summary-line"><strong>${esc(s.filters[key])}:</strong> ${d.labels.map(esc).join(' · ')}</p>`)
+    .join('');
 
   return `
     <section id="habilidades" class="section" aria-labelledby="skills-title">
@@ -159,6 +186,7 @@ function renderSkills(c) {
         <div class="chart-container"><canvas id="skills-chart" role="img" aria-label="${esc(first.title)}"></canvas></div>
       </div>
       <div class="skills-tables">${tables}</div>
+      <div class="skills-summary">${summary}</div>
     </section>`;
 }
 
@@ -178,7 +206,7 @@ function renderStrengths(c) {
     <section id="fortalezas" class="section" aria-labelledby="strengths-title">
       <h2 id="strengths-title" class="section-title">${esc(c.strengths.title)}</h2>
       <p class="section-subtitle">${esc(c.strengths.subtitle)}</p>
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">${cards}</div>
+      <div class="strengths-grid grid gap-6 md:grid-cols-2 lg:grid-cols-3">${cards}</div>
     </section>`;
 }
 
@@ -207,7 +235,7 @@ function renderEducation(c) {
   return `
     <section id="formacion" class="section" aria-labelledby="education-title">
       <h2 id="education-title" class="section-title">${esc(e.title)}</h2>
-      <div class="mx-auto mt-10 grid max-w-4xl gap-6 md:grid-cols-2">
+      <div class="edu-grid mx-auto mt-10 grid max-w-4xl gap-6 md:grid-cols-2">
         <div class="edu-card">
           <h3 class="edu-heading">${icon('graduation-cap', 'h-5 w-5')}<span>${esc(e.degreesTitle)}</span></h3>
           <ul class="space-y-4">${degrees}</ul>
@@ -221,7 +249,7 @@ function renderEducation(c) {
 }
 
 export function renderMain(c, ctx) {
-  return [renderHero(c, ctx), renderCareer(c), renderSkills(c), renderStrengths(c), renderEducation(c)].join('\n');
+  return [renderHero(c, ctx), renderCareer(c), renderProjects(c), renderSkills(c), renderStrengths(c), renderEducation(c)].join('\n');
 }
 
 export function renderFooter(c, ctx, lang) {
@@ -233,9 +261,10 @@ export function renderFooter(c, ctx, lang) {
       <p class="mt-1 text-sm text-gray-300">${esc(c.footer.updated)}: ${esc(formatUpdated(ctx.updated, lang))}</p>
       <p class="no-print mt-5 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
         <a class="footer-link" ${external(ctx.contact.linkedin)}>LinkedIn<span class="sr-only"> ${esc(c.ui.newTab)}</span></a>
-        <a class="footer-link" ${external(ctx.contact.github)}>GitHub<span class="sr-only"> ${esc(c.ui.newTab)}</span></a>
+        ${ctx.contact.github ? `<a class="footer-link" ${external(ctx.contact.github)}>GitHub<span class="sr-only"> ${esc(c.ui.newTab)}</span></a>` : ''}
+        <a class="footer-link" href="${esc(c.ui.pdfHref)}" download>${esc(c.ui.pdf)}</a>
         <button type="button" class="footer-link" data-action="print">${esc(c.ui.print)}</button>
       </p>
-      <p class="mt-6 text-xs text-gray-400">${esc(c.footer.credits)}</p>
+      <p class="footer-credits mt-6 text-xs text-gray-400">${esc(c.footer.credits)}</p>
     </div>`;
 }

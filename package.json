@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "node build.mjs",
-    "serve": "node serve.mjs"
+    "serve": "node serve.mjs",
+    "pdf": "node tools/make-pdf.mjs"
   },
   "devDependencies": {
     "@fontsource-variable/inter": "^5.2.5",

@@ -10,14 +10,16 @@ Sitio estático, autoalojado en el homelab. Sin dependencias externas en tiempo 
 index.html            HTML final (GENERADO por build.mjs; el contenido ES viene prerenderizado)
 404.html, robots.txt, sitemap.xml, favicon.svg
 assets/
-  js/content.js       FUENTE DE VERDAD del contenido (ES y EN) y datos de contacto
+  js/content.js       FUENTE DE VERDAD del contenido (ES y EN): experiencia, proyectos, habilidades y contacto
   js/render.js        funciones de render compartidas (build + navegador)
   js/app.js           comportamiento: idioma, menú, expandir/contraer, gráfica, impresión
   js/icons.js         GENERADO (Font Awesome Free) · js/chart.umd.min.js (Chart.js, carga diferida)
   css/styles.css      GENERADO por Tailwind desde src/input.css · css/noscript.css
   fonts/, img/og.png  Inter (variable) e imagen para compartir enlaces
+  cv/                 GENERADOS: CV en PDF (ES y EN), curados para impresión (4 páginas)
 src/                  template.html, input.css, og.html (fuente de la imagen og.png)
 deploy/               nginx.conf, docker-compose.yml, deploy.sh, bifrost-publish.sh
+tools/make-pdf.mjs    genera los PDF desde el propio sitio con Edge/Chrome headless (CHROME_PATH opcional)
 build.mjs, serve.mjs  build y servidor local (con la misma CSP que producción)
 ```
 
@@ -26,12 +28,15 @@ build.mjs, serve.mjs  build y servidor local (con la misma CSP que producción)
 ```bash
 npm install
 npm run build     # iconos -> Tailwind -> index.html prerenderizado + sitemap
+npm run pdf       # PDF del CV en assets/cv/ (ES y EN) usando el modo de impresión del sitio
 npm run serve     # http://localhost:8099
 ```
 
 Para cambiar texto, experiencia, habilidades, teléfono o enlaces: edita **`assets/js/content.js`** y corre `npm run build`. Nunca edites `index.html`, `icons.js` ni `styles.css` a mano.
 
-Reglas del contenido: no publiques datos sensibles (domicilio, fecha de nacimiento, matrícula, sueldos). El sitio solo expone correo, WhatsApp, LinkedIn y GitHub.
+Reglas del contenido: no publiques datos sensibles (domicilio, fecha de nacimiento, matrícula, créditos, sueldos, finanzas). El sitio solo expone correo, WhatsApp y LinkedIn. `contact.github` está vacío a propósito: se activa cuando el perfil público de GitHub muestre proyectos propios.
+
+Todo lo que afirma `content.js` debe poder verificarse (repos, pruebas, documentación). Los PDF se regeneran en cada `deploy.sh`; en impresión se muestran completos los puestos recientes (`printCompact: true` los resume) y se omiten secciones de relleno.
 
 Imagen para compartir (1200×630), si cambias `src/og.html`:
 

@@ -277,6 +277,10 @@
     @apply sr-only;
   }
 
+  .skills-summary {
+    display: none;
+  }
+
   .skills-table {
     @apply mx-auto mb-6 w-full max-w-xl border-collapse text-left text-sm;
   }
@@ -317,6 +321,38 @@
     @apply text-gray-600;
   }
 
+  .project-card {
+    @apply flex flex-col rounded-xl border-t-4 border-accent bg-white p-6 shadow-md sm:p-8;
+  }
+
+  .project-name {
+    @apply text-2xl font-bold text-gray-800;
+  }
+
+  .project-kind {
+    @apply mt-1 text-sm font-semibold text-accent-dark;
+  }
+
+  .project-summary {
+    @apply mt-4 text-gray-700;
+  }
+
+  .project-list {
+    @apply mt-4 list-disc space-y-2 pl-5 text-gray-600;
+  }
+
+  .stack-list {
+    @apply mt-auto flex flex-wrap gap-2 pt-6;
+  }
+
+  .stack-chip {
+    @apply rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent-dark;
+  }
+
+  .project-note {
+    @apply mx-auto mt-8 max-w-3xl text-center text-sm italic text-gray-600;
+  }
+
   .edu-card {
     @apply rounded-lg bg-white p-6 shadow-md sm:p-8;
   }
@@ -348,25 +384,40 @@
 
 @media print {
   @page {
-    margin: 14mm;
+    margin: 10mm 12mm;
+  }
+
+  html {
+    font-size: 12px;
   }
 
   body {
     background: #fff;
-    color: #000;
-    font-size: 11pt;
+    color: #111;
   }
 
   .no-print,
   #site-header,
   .btn,
-  .skip-link {
+  .skip-link,
+  .section-subtitle:not(.keep-print) {
     display: none !important;
+  }
+
+  main {
+    padding: 0;
+    max-width: none;
   }
 
   #site-footer {
     background: #fff;
-    color: #000;
+    color: #444;
+    border-top: 1px solid #ddd;
+  }
+
+  #site-footer .mx-auto {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 
   #site-footer p {
@@ -375,25 +426,124 @@
 
   .hero {
     min-height: 0;
-    padding: 0 0 1rem;
+    padding: 0 0 0.5rem;
   }
 
-  .section {
-    padding: 1rem 0;
+  .stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 0.6rem !important;
+  }
+
+  .edu-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.6rem !important;
+    margin-top: 0.5rem;
+  }
+
+  .tl-older .tl-body,
+  .footer-credits {
+    display: none;
   }
 
   .hero-name {
-    font-size: 26pt;
+    font-size: 2.1rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .hero-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-summary {
+    font-size: 1rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .section {
+    padding: 0.6rem 0 0;
+  }
+
+  .section-title {
+    text-align: left;
+    font-size: 1.45rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 2px solid #d4a373;
+    break-after: avoid;
+  }
+
+  .section-subtitle {
+    text-align: left;
+    font-size: 0.95rem;
+    margin: 0 0 0.6rem;
+    max-width: none;
+    break-after: avoid;
   }
 
   .stat,
   .tl-card,
+  .project-card,
   .strength-card,
   .edu-card,
   .chip {
     box-shadow: none;
     border-color: #ddd;
+  }
+
+  .stat {
+    padding: 0.35rem 0.65rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .timeline {
+    margin: 0;
+    padding-left: 0;
+    border-left: 0;
+    max-width: none;
+    row-gap: 0.6rem;
+  }
+
+  .timeline > li {
+    margin-top: 0.45rem;
+  }
+
+  .tl-dot,
+  .tl-chevron {
+    display: none;
+  }
+
+  .tl-card {
+    border-left-width: 3px;
+  }
+
+  .tl-older {
     break-inside: avoid;
+  }
+
+  .tl-summary {
+    padding: 0.5rem 0.75rem 0.25rem;
+    break-after: avoid;
+  }
+
+  .tl-role {
+    font-size: 1.15rem;
+  }
+
+  .tl-text {
+    padding-top: 0.2rem;
+  }
+
+  .tl-body {
+    padding: 0 0.75rem 0.6rem;
+  }
+
+  .tl-list {
+    margin-top: 0.2rem;
+    row-gap: 0.15rem;
   }
 
   .tl-card::details-content {
@@ -401,24 +551,94 @@
     block-size: auto !important;
   }
 
-  .tl-chevron {
+  .projects-grid {
+    display: block !important;
+    column-count: 2;
+    column-gap: 0.5rem;
+    column-fill: auto;
+  }
+
+  .projects-grid .project-card {
+    margin-bottom: 0.5rem;
+    break-inside: avoid;
+    display: block;
+  }
+
+  .strengths-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0.6rem !important;
+  }
+
+  .skills-table th,
+  .skills-table td {
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+
+  .project-card,
+  .strength-card,
+  .edu-card {
+    padding: 0.7rem 0.85rem;
+    break-inside: avoid;
+  }
+
+  .project-name {
+    font-size: 1.3rem;
+  }
+
+  .project-summary,
+  .project-list {
+    margin-top: 0.3rem;
+  }
+
+  .stack-list {
+    padding-top: 0.3rem;
+  }
+
+  .edu-card {
+    padding: 0.4rem 0.7rem;
+  }
+
+  .edu-heading {
+    margin-bottom: 0.3rem;
+  }
+
+  .strength-icon {
     display: none;
   }
 
-  .skills-tables {
-    position: static;
-    width: auto;
-    height: auto;
-    margin: 1rem 0 0;
-    padding: 0;
-    overflow: visible;
-    clip: auto;
-    white-space: normal;
-    columns: 2;
+  .strength-title {
+    font-size: 1.1rem;
+  }
+
+  .skills-tables,
+  #fortalezas,
+  .project-card:not(.project-featured) .project-list {
+    display: none !important;
+  }
+
+  .project-featured .project-list li:nth-child(2),
+  .project-featured .project-list li:nth-child(4) {
+    display: none;
+  }
+
+  .skills-summary {
+    display: block;
+  }
+
+  .skills-summary-line {
+    margin: 0 0 0.35rem;
+    line-height: 1.45;
   }
 
   .skills-table {
     break-inside: avoid;
     max-width: none;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .skills-table caption {
+    font-size: 0.95rem;
   }
 }

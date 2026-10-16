@@ -23,6 +23,8 @@ const FA_ICONS = {
   users: 'solid/users',
   'arrows-rotate': 'solid/arrows-rotate',
   link: 'solid/link',
+  download: 'solid/download',
+  robot: 'solid/robot',
   whatsapp: 'brands/whatsapp',
   linkedin: 'brands/linkedin',
   github: 'brands/github',
@@ -91,10 +93,10 @@ async function buildHtml(version, updated) {
     url: `${SITE_URL}/`,
     jobTitle: 'Ingeniero de Software y Arquitecto Empresarial',
     description: c.meta.description,
-    sameAs: [contact.linkedin, contact.github],
+    sameAs: [contact.linkedin, contact.github].filter(Boolean),
     alumniOf: { '@type': 'CollegeOrUniversity', name: 'Universidad Autónoma de Chihuahua' },
     knowsLanguage: ['es', 'en'],
-    knowsAbout: ['Java', 'Spring Boot', 'JavaScript', 'React', 'Oracle Database', 'PostgreSQL', 'TOGAF', 'ArchiMate', 'Enterprise Architecture', 'Agile'],
+    knowsAbout: ['Java', 'Spring Boot', 'JavaScript', 'TypeScript', 'React', 'Python', 'FastAPI', 'Rust', 'Oracle Database', 'PostgreSQL', 'Supabase', 'Docker', 'TOGAF', 'ArchiMate', 'Enterprise Architecture', 'Agile', 'AI-assisted software engineering'],
   };
 
   const html = fill(readFileSync(at('src/template.html'), 'utf8'), {

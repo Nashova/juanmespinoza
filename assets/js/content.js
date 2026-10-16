@@ -3,15 +3,16 @@ export const contact = {
   phoneDisplay: '+52 8110 416872',
   whatsapp: '528110416872',
   linkedin: 'https://www.linkedin.com/in/juanmanuelespinozanevarez',
-  github: 'https://github.com/Nashova',
+  // Vacío mientras el perfil público de GitHub no muestre proyectos propios; si se llena, aparece en contacto y pie.
+  github: '',
 };
 
 export const careerStart = { year: 2007, month: 7 };
 
 const skillValues = {
-  languages: [10, 10, 8, 10, 9, 6, 6],
+  languages: [10, 10, 8, 10, 9, 6, 6, 6, 4],
   databases: [9, 8, 8, 6, 5],
-  tools: [10, 9, 8, 9, 6, 5, 3],
+  tools: [10, 9, 8, 9, 6, 5, 7, 8],
 };
 
 export const content = {
@@ -19,7 +20,7 @@ export const content = {
     meta: {
       title: 'Juan Manuel Espinoza Nevárez — Ingeniero de Software y Arquitecto Empresarial',
       description:
-        'CV interactivo de Juan Manuel Espinoza Nevárez: ingeniero de software, arquitecto empresarial y líder técnico con casi dos décadas de experiencia en Java, JavaScript, Oracle y TOGAF.',
+        'CV interactivo de Juan Manuel Espinoza Nevárez: ingeniero de software, arquitecto empresarial y líder técnico con casi dos décadas de experiencia (Java, JavaScript, Oracle, TOGAF) y productos propios construidos con ingeniería asistida por IA.',
     },
     ui: {
       skip: 'Saltar al contenido',
@@ -31,11 +32,14 @@ export const content = {
       nav: {
         home: 'Inicio',
         career: 'Trayectoria',
+        projects: 'Proyectos',
         skills: 'Habilidades',
         strengths: 'Fortalezas',
         education: 'Formación',
       },
-      print: 'Imprimir / PDF',
+      print: 'Imprimir',
+      pdf: 'Descargar CV (PDF)',
+      pdfHref: '/assets/cv/Juan-Manuel-Espinoza-CV-ES.pdf',
       viewCareer: 'Ver trayectoria',
       expandAll: 'Expandir todo',
       collapseAll: 'Contraer todo',
@@ -46,10 +50,11 @@ export const content = {
       name: 'Juan Manuel Espinoza Nevárez',
       title: 'Ingeniero de Software | Arquitecto Empresarial | Líder Técnico',
       summary:
-        'Ingeniero en sistemas con casi dos décadas de experiencia en la progresión desde el desarrollo de software hasta el liderazgo técnico y la arquitectura empresarial. Mi carrera se define por la resolución de problemas complejos, la gestión de equipos y un enfoque en la escalabilidad, el rendimiento y la fiabilidad de las soluciones tecnológicas.',
+        'Ingeniero en sistemas con casi dos décadas llevando software de la arquitectura a producción: desde desarrollo Java/PHP y arquitectura empresarial (TOGAF) en corporativos como FEMSA, hasta la gestión de soporte L4 y de las aplicaciones críticas de comercio exterior que sostienen la operación de más de 70 empresas. Hoy sumo ingeniería asistida por IA para construir productos completos —SaaS multi-tenant, apps nativas e infraestructura propia— con pruebas, documentación y verificación de punta a punta.',
       stats: [
         { value: '{years}+', label: 'Años de experiencia' },
         { value: '70+', label: 'Empresas apoyadas' },
+        { value: '50', label: 'Personas lideradas (máximo)' },
         { value: 'L4', label: 'Nivel de soporte técnico' },
       ],
     },
@@ -104,6 +109,7 @@ export const content = {
           period: 'Nov 2018 – Sep 2019',
           role: 'Desarrollador Sr.',
           company: 'Dresden Partners (asignado a HCL / Nokia)',
+          printCompact: true,
           summary: 'Desarrollo de herramientas y flujos de trabajo en un sistema propietario de Nokia.',
           bullets: [
             'Desarrollé herramientas personalizadas para los proyectos de Nokia, utilizando tecnologías como RhinoJS, HTML, JSON y Web Services.',
@@ -130,6 +136,7 @@ export const content = {
           period: 'Abr 2013 – Nov 2015',
           role: 'Desarrollador Java / PHP',
           company: 'Softnet Soluciones (asignado a Qualitypost)',
+          printCompact: true,
           summary: 'Mantenimiento de la aplicación NPOS y desarrollo de soluciones logísticas a nivel nacional.',
           bullets: [
             'Analicé requerimientos y dialogué con clientes y terceros para mejorar los procesos de recolección y entrega a nivel nacional.',
@@ -143,6 +150,7 @@ export const content = {
           period: 'Oct 2010 – Abr 2013',
           role: 'Líder de Desarrolladores Java',
           company: 'Grupo Empresarial EISEI',
+          printCompact: true,
           summary: 'Paso fundamental hacia el liderazgo, gestionando equipos para clientes como OXXO y FAMSA.',
           bullets: [
             'Gestioné y lideré un equipo de desarrollo de hasta 12 personas, coordinando proyectos para clientes de alto perfil como OXXO y FAMSA.',
@@ -156,6 +164,7 @@ export const content = {
           period: 'Oct 2009 – Feb 2010',
           role: 'Desarrollador Web',
           company: 'Exosfera.com',
+          printCompact: true,
           summary: 'Experiencia en desarrollo web con PHP y MySQL, enfocado en maquetación y mantenimiento.',
           bullets: [
             'Desarrollé y mantuve sitios web utilizando PHP y MySQL, implementando funcionalidades de back-end y conexiones a bases de datos.',
@@ -167,6 +176,7 @@ export const content = {
           period: 'Jul 2007 – Oct 2009',
           role: 'Desarrollador Java',
           company: 'UACH',
+          printCompact: true,
           summary: 'Desarrollo de aplicaciones web internas y administración de bases de datos PostgreSQL.',
           bullets: [
             'Desarrollé aplicaciones Java para cumplir con los requisitos del negocio, mejorando la experiencia del usuario y optimizando el código.',
@@ -174,6 +184,102 @@ export const content = {
             'Colaboré en la solución de problemas de producción, proporcionando soluciones rápidas para minimizar el tiempo de inactividad.',
             'Participé en todas las etapas del ciclo de vida del desarrollo de software, desde la definición de requisitos hasta el despliegue.',
           ],
+        },
+      ],
+    },
+    projects: {
+      title: 'Proyectos',
+      subtitle:
+        'Productos completos que diseñé, construí y opero. Trabajo con ingeniería asistida por IA: yo defino la arquitectura, las especificaciones y los criterios de verificación; los agentes implementan, y yo reviso y valido con pruebas y evidencia real.',
+      note: 'El código de estos proyectos es privado; demos y revisión de código disponibles bajo solicitud.',
+      stackLabel: 'Tecnologías',
+      items: [
+        {
+          name: 'MUSA',
+          kind: 'SaaS multi-tenant · 2026',
+          featured: true,
+          summary:
+            'Plataforma para digitalizar un taller de sublimación: inventario, catálogos, cotizaciones, órdenes de producción y entregas, con aislamiento de datos por cliente.',
+          bullets: [
+            'Arquitectura en capas: SPA en React 19 + TypeScript, API en FastAPI y Supabase autoalojado (PostgreSQL con seguridad por filas y autenticación con JWT).',
+            'Inventario perpetuo con bitácora de movimientos y triggers, recetas de producción, tablero Kanban y cuaderno sobre las mismas órdenes, y un algoritmo propio de fecha de entrega.',
+            'Más de 100 pruebas automatizadas, 7 decisiones de arquitectura documentadas (ADR) y respaldos con restauración probada.',
+            'Despliegue blue-green con Docker Compose y Caddy; migrado a otro servidor tras una falla de disco, con diagnóstico y recuperación documentados.',
+          ],
+          stack: ['React 19', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Supabase', 'Docker', 'GitHub Actions'],
+        },
+        {
+          name: 'Medusa ERP',
+          kind: 'ERP SaaS para PyMEs · 2025–2026',
+          summary:
+            'ERP en la nube para microempresas de personalización y manufactura ligera: ventas, compras, cotizaciones, finanzas, facturación y reportes en una sola fuente de verdad.',
+          bullets: [
+            'Multi-tenant, con roles jerárquicos de cinco niveles y módulos activables por empresa.',
+            'React 18 con TypeScript estricto, Supabase (PostgreSQL, Auth, Edge Functions, Storage) y pagos con Stripe; unas 49 mil líneas de código y 43 migraciones SQL.',
+            'Pruebas unitarias con Vitest y de extremo a extremo con Playwright; exportación a PDF.',
+          ],
+          stack: ['React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Stripe', 'Playwright', 'Tailwind'],
+        },
+        {
+          name: 'LLM Dev Framework',
+          kind: 'Framework con licencia MIT · 2026',
+          summary:
+            'Método reutilizable para construir y mantener software con agentes de IA como colaboradores técnicos, destilado de tres sistemas reales.',
+          bullets: [
+            '9 skills propias (por ejemplo, verify-before-claiming y safe-change-gate), 23 patrones de arquitectura y 11 plantillas de gobierno.',
+            'Scripts en PowerShell y Bash: conector multi-IA (Claude, Gemini, Cursor, Copilot, Windsurf), validador anti-deriva de documentación, verificación de seguridad y flujo de entrega.',
+            'Casos de estudio anonimizados; ya aplicado de punta a punta en proyectos propios como Nasheim.',
+          ],
+          stack: ['PowerShell', 'Bash', 'Markdown', 'Agent Skills'],
+        },
+        {
+          name: 'Nasheim',
+          kind: 'App nativa de escritorio y Android · 2026',
+          summary:
+            'Aplicación de administración personal que lee y escribe directamente un vault de Obsidian en OneDrive y muestra pendientes, estados y recordatorios con notificaciones reales.',
+          bullets: [
+            'Rust (edición 2024) con Tauri 2 para el cliente de escritorio en Windows, con instalador .msi; cliente Android nativo en desarrollo.',
+            'Núcleo compartido con acceso al vault local y vía Microsoft Graph (plugin MSAL propio), caché en SQLite cifrado (SQLCipher) y planificador de recordatorios.',
+            'Desarrollo guiado por especificaciones (constitución del proyecto, 8 features especificadas y protocolo de ejecución idempotente), 35 pruebas y CI.',
+          ],
+          stack: ['Rust', 'Tauri', 'SQLite', 'Microsoft Graph', 'Android', 'GitHub Actions'],
+        },
+        {
+          name: 'Fontaine',
+          kind: 'App de escritorio para Windows · 2026',
+          summary:
+            'Administrador de fuentes tipográficas con sincronización entre equipos de la red local y un agente que sugiere fuentes similares a partir de una imagen.',
+          bullets: [
+            'Python con FastAPI embebido y descubrimiento de equipos por mDNS; catálogo en SQLite con metadatos tipográficos (fonttools).',
+            'Agente de visión con proveedores conectables: heurística local, otro equipo de la red o API en la nube, configurable en ejecución.',
+            'Coordinación de varios agentes de IA (Claude, Gemini y modelos locales con Ollama) mediante especificaciones numeradas; unas 7 mil líneas y 75 pruebas.',
+          ],
+          stack: ['Python', 'FastAPI', 'SQLite', 'fonttools', 'mDNS', 'Ollama'],
+        },
+        {
+          name: 'Tienda en línea de sublimación',
+          kind: 'E-commerce · 2025–2026',
+          summary:
+            'Tienda de productos sublimados y personalizados con catálogo, comparador, lista de deseos, pago en línea y panel de administración.',
+          bullets: [
+            'Catálogo y detalle de producto, personalización, checkout con Stripe, pedidos y perfil de cliente.',
+            'SEO técnico: datos estructurados JSON-LD, sitemap y metadatos; políticas y envíos.',
+            'React y TypeScript sobre Supabase; unas 12 mil líneas de código.',
+          ],
+          stack: ['React', 'TypeScript', 'Supabase', 'Stripe', 'SEO'],
+        },
+        {
+          name: 'Homelab e IA local',
+          kind: 'Infraestructura propia · 2026',
+          summary:
+            'Laboratorio doméstico que opero como producción: servicios autoalojados, acceso seguro desde internet y modelos de IA que corren localmente.',
+          bullets: [
+            'Nodos Linux (Debian) con Docker Compose, malla privada Tailscale y Cloudflare Tunnel con Caddy para publicar sitios sin abrir puertos.',
+            'Supabase autoalojado, Uptime Kuma y panel Homepage; los sitios nuevos corren endurecidos: sin privilegios, sistema de archivos de solo lectura y healthchecks.',
+            'IA local con Ollama y Open WebUI (Qwen2.5-Coder, Qwen3, Gemma y modelos de visión), con delegación de tareas mecánicas a modelos locales.',
+            'Este mismo sitio se sirve desde ahí: estático, con CSP estricta y sin dependencias externas.',
+          ],
+          stack: ['Debian', 'Docker', 'Tailscale', 'Cloudflare Tunnel', 'Caddy', 'Ollama', 'Open WebUI'],
         },
       ],
     },
@@ -193,7 +299,7 @@ export const content = {
       data: {
         languages: {
           title: 'Nivel de experiencia en lenguajes y frameworks',
-          labels: ['Java EE (Spring Boot)', 'JavaScript (React, Node)', 'PHP', 'HTML/CSS', 'SQL/PL-SQL', 'Ruby on Rails', 'Angular'],
+          labels: ['Java EE (Spring Boot)', 'JavaScript / TypeScript (React, Node)', 'PHP', 'HTML/CSS', 'SQL/PL-SQL', 'Python (FastAPI)', 'Ruby on Rails', 'Angular', 'Rust'],
           values: skillValues.languages,
         },
         databases: {
@@ -203,7 +309,7 @@ export const content = {
         },
         tools: {
           title: 'Competencia en herramientas y metodologías',
-          labels: ['Arquitectura (TOGAF)', 'CI/CD (Jenkins, Git)', 'Monitoreo (Splunk)', 'Agile (Scrum/Kanban)', 'Cloud (Azure)', 'GitLab', 'Docker'],
+          labels: ['Arquitectura (TOGAF)', 'CI/CD (GitHub Actions, Jenkins, Git)', 'Monitoreo (Splunk)', 'Agile (Scrum/Kanban)', 'Cloud (Azure)', 'GitLab', 'Docker y Linux', 'Ingeniería asistida por IA'],
           values: skillValues.tools,
         },
       },
@@ -238,6 +344,11 @@ export const content = {
           title: 'Visión holística: del código a la estrategia',
           text: 'Mi experiencia como Arquitecto Empresarial (TOGAF, ArchiMate) me otorga una perspectiva que conecta las decisiones técnicas con los objetivos de negocio, garantizando la alineación y el gobierno de TI.',
         },
+        {
+          icon: 'robot',
+          title: 'Ingeniería asistida por IA, con rigor',
+          text: 'Diseño especificaciones, contratos y protocolos para trabajar con agentes de IA (Claude, Gemini y modelos locales con Ollama) y verifico cada resultado con pruebas y evidencia real. Lo documenté como un framework reutilizable con licencia MIT.',
+        },
       ],
     },
     education: {
@@ -266,7 +377,7 @@ export const content = {
     meta: {
       title: 'Juan Manuel Espinoza Nevarez — Software Engineer & Enterprise Architect',
       description:
-        'Interactive résumé of Juan Manuel Espinoza Nevarez: software engineer, enterprise architect and technical lead with nearly two decades of experience in Java, JavaScript, Oracle and TOGAF.',
+        'Interactive résumé of Juan Manuel Espinoza Nevarez: software engineer, enterprise architect and technical lead with nearly two decades of experience (Java, JavaScript, Oracle, TOGAF) and own products built with AI-assisted engineering.',
     },
     ui: {
       skip: 'Skip to content',
@@ -278,11 +389,14 @@ export const content = {
       nav: {
         home: 'Home',
         career: 'Career',
+        projects: 'Projects',
         skills: 'Skills',
         strengths: 'Strengths',
         education: 'Education',
       },
-      print: 'Print / PDF',
+      print: 'Print',
+      pdf: 'Download résumé (PDF)',
+      pdfHref: '/assets/cv/Juan-Manuel-Espinoza-CV-EN.pdf',
       viewCareer: 'View career',
       expandAll: 'Expand all',
       collapseAll: 'Collapse all',
@@ -293,10 +407,11 @@ export const content = {
       name: 'Juan Manuel Espinoza Nevarez',
       title: 'Software Engineer | Enterprise Architect | Technical Lead',
       summary:
-        'A systems engineer with nearly two decades of experience progressing from software development to technical leadership and enterprise architecture. My career is defined by solving complex problems, managing teams, and focusing on the scalability, performance, and reliability of technology solutions.',
+        'Systems engineer with nearly two decades of taking software from architecture to production: from Java/PHP development and enterprise architecture (TOGAF) at large corporations such as FEMSA, to managing L4 support and the critical foreign-trade applications that keep more than 70 companies running. Today I add AI-assisted engineering to build complete products — multi-tenant SaaS, native apps and self-hosted infrastructure — with tests, documentation and end-to-end verification.',
       stats: [
         { value: '{years}+', label: 'Years of experience' },
         { value: '70+', label: 'Companies supported' },
+        { value: '50', label: 'People led (maximum)' },
         { value: 'L4', label: 'Technical support level' },
       ],
     },
@@ -351,6 +466,7 @@ export const content = {
           period: 'Nov 2018 – Sep 2019',
           role: 'Sr. Developer',
           company: 'Dresden Partners (assigned to HCL / Nokia)',
+          printCompact: true,
           summary: 'Development of tools and workflows in a proprietary Nokia system.',
           bullets: [
             'Developed custom tools for Nokia projects using technologies such as RhinoJS, HTML, JSON and Web Services.',
@@ -377,6 +493,7 @@ export const content = {
           period: 'Apr 2013 – Nov 2015',
           role: 'Java / PHP Developer',
           company: 'Softnet Soluciones (assigned to Qualitypost)',
+          printCompact: true,
           summary: 'Maintenance of the NPOS application and development of national logistics solutions.',
           bullets: [
             'Analyzed requirements and worked with clients and third parties to improve national pickup and delivery processes.',
@@ -390,6 +507,7 @@ export const content = {
           period: 'Oct 2010 – Apr 2013',
           role: 'Java Developer Lead',
           company: 'Grupo Empresarial EISEI',
+          printCompact: true,
           summary: 'A fundamental step toward leadership, managing teams for clients such as OXXO and FAMSA.',
           bullets: [
             'Managed and led a development team of up to 12 people, coordinating projects for high-profile clients such as OXXO and FAMSA.',
@@ -403,6 +521,7 @@ export const content = {
           period: 'Oct 2009 – Feb 2010',
           role: 'Web Developer',
           company: 'Exosfera.com',
+          printCompact: true,
           summary: 'Web development experience with PHP and MySQL, focused on layout and maintenance.',
           bullets: [
             'Developed and maintained websites using PHP and MySQL, implementing back-end functionality and database connections.',
@@ -414,6 +533,7 @@ export const content = {
           period: 'Jul 2007 – Oct 2009',
           role: 'Java Developer',
           company: 'UACH',
+          printCompact: true,
           summary: 'Development of internal web applications and administration of PostgreSQL databases.',
           bullets: [
             'Developed Java applications to meet business requirements, improving user experience and optimizing code.',
@@ -421,6 +541,102 @@ export const content = {
             'Helped troubleshoot production issues, providing quick fixes to minimize downtime.',
             'Took part in every stage of the software development lifecycle, from requirements definition to deployment.',
           ],
+        },
+      ],
+    },
+    projects: {
+      title: 'Projects',
+      subtitle:
+        'Complete products I designed, built and operate. I work with AI-assisted engineering: I define the architecture, specifications and verification criteria; agents implement, and I review and validate with tests and real evidence.',
+      note: 'The code for these projects is private; demos and code reviews are available on request.',
+      stackLabel: 'Technologies',
+      items: [
+        {
+          name: 'MUSA',
+          kind: 'Multi-tenant SaaS · 2026',
+          featured: true,
+          summary:
+            'Platform to digitize a sublimation print shop: inventory, catalogs, quotes, production orders and deliveries, with per-customer data isolation.',
+          bullets: [
+            'Layered architecture: React 19 + TypeScript SPA, FastAPI backend and self-hosted Supabase (PostgreSQL with row-level security and JWT authentication).',
+            'Perpetual inventory with a movement ledger and triggers, production recipes (BOM), a Kanban board and a notebook view over the same orders, and a custom delivery-date algorithm.',
+            'More than 100 automated tests, 7 documented architecture decisions (ADRs) and backups with a proven restore.',
+            'Blue-green deployment with Docker Compose and Caddy; migrated to another server after a disk failure, with the diagnosis and recovery documented.',
+          ],
+          stack: ['React 19', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Supabase', 'Docker', 'GitHub Actions'],
+        },
+        {
+          name: 'Medusa ERP',
+          kind: 'SaaS ERP for SMBs · 2025–2026',
+          summary:
+            'Cloud ERP for micro-businesses in personalization and light manufacturing: sales, purchasing, quotes, finance, invoicing and reporting in a single source of truth.',
+          bullets: [
+            'Multi-tenant, with five-level role hierarchy and modules that can be enabled per company.',
+            'React 18 with strict TypeScript, Supabase (PostgreSQL, Auth, Edge Functions, Storage) and Stripe payments; about 49k lines of code and 43 SQL migrations.',
+            'Unit tests with Vitest and end-to-end tests with Playwright; PDF export.',
+          ],
+          stack: ['React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Stripe', 'Playwright', 'Tailwind'],
+        },
+        {
+          name: 'LLM Dev Framework',
+          kind: 'MIT-licensed framework · 2026',
+          summary:
+            'Reusable method to build and maintain software with AI agents as technical collaborators, distilled from three real systems.',
+          bullets: [
+            '9 custom skills (for example, verify-before-claiming and safe-change-gate), 23 architecture patterns and 11 governance templates.',
+            'PowerShell and Bash scripts: multi-AI connector (Claude, Gemini, Cursor, Copilot, Windsurf), documentation anti-drift validator, safety checks and a delivery flow.',
+            'Anonymized case studies; already applied end to end in my own projects such as Nasheim.',
+          ],
+          stack: ['PowerShell', 'Bash', 'Markdown', 'Agent Skills'],
+        },
+        {
+          name: 'Nasheim',
+          kind: 'Native desktop and Android app · 2026',
+          summary:
+            'Personal administration app that reads and writes an Obsidian vault on OneDrive directly and surfaces to-dos, statuses and reminders with real notifications.',
+          bullets: [
+            'Rust (2024 edition) with Tauri 2 for the Windows desktop client, with an .msi installer; native Android client in progress.',
+            'Shared core with local vault access and Microsoft Graph access (own MSAL plugin), encrypted SQLite cache (SQLCipher) and a reminder scheduler.',
+            'Specification-driven development (project constitution, 8 specified features and an idempotent execution protocol), 35 tests and CI.',
+          ],
+          stack: ['Rust', 'Tauri', 'SQLite', 'Microsoft Graph', 'Android', 'GitHub Actions'],
+        },
+        {
+          name: 'Fontaine',
+          kind: 'Windows desktop app · 2026',
+          summary:
+            'Font manager with synchronization between computers on the local network and an agent that suggests similar fonts from an image.',
+          bullets: [
+            'Python with embedded FastAPI and peer discovery over mDNS; SQLite catalog with typographic metadata (fonttools).',
+            'Vision agent with pluggable providers: local heuristic, another machine on the network or a cloud API, configurable at runtime.',
+            'Coordination of several AI agents (Claude, Gemini and local models with Ollama) through numbered specifications; about 7k lines and 75 tests.',
+          ],
+          stack: ['Python', 'FastAPI', 'SQLite', 'fonttools', 'mDNS', 'Ollama'],
+        },
+        {
+          name: 'Sublimation online store',
+          kind: 'E-commerce · 2025–2026',
+          summary:
+            'Store for sublimated and personalized products with catalog, comparison, wishlist, online payment and an admin panel.',
+          bullets: [
+            'Catalog and product detail, personalization, Stripe checkout, orders and customer profile.',
+            'Technical SEO: JSON-LD structured data, sitemap and metadata; policies and shipping.',
+            'React and TypeScript on Supabase; about 12k lines of code.',
+          ],
+          stack: ['React', 'TypeScript', 'Supabase', 'Stripe', 'SEO'],
+        },
+        {
+          name: 'Homelab & local AI',
+          kind: 'Own infrastructure · 2026',
+          summary:
+            'A home lab that I run like production: self-hosted services, secure access from the internet and AI models running locally.',
+          bullets: [
+            'Linux (Debian) nodes with Docker Compose, a Tailscale private mesh and Cloudflare Tunnel with Caddy to publish sites without opening ports.',
+            'Self-hosted Supabase, Uptime Kuma and a Homepage dashboard; new sites run hardened: unprivileged, read-only filesystem and healthchecks.',
+            'Local AI with Ollama and Open WebUI (Qwen2.5-Coder, Qwen3, Gemma and vision models), delegating mechanical tasks to local models.',
+            'This very site is served from there: static, with a strict CSP and no external dependencies.',
+          ],
+          stack: ['Debian', 'Docker', 'Tailscale', 'Cloudflare Tunnel', 'Caddy', 'Ollama', 'Open WebUI'],
         },
       ],
     },
@@ -440,7 +656,7 @@ export const content = {
       data: {
         languages: {
           title: 'Experience level in languages and frameworks',
-          labels: ['Java EE (Spring Boot)', 'JavaScript (React, Node)', 'PHP', 'HTML/CSS', 'SQL/PL-SQL', 'Ruby on Rails', 'Angular'],
+          labels: ['Java EE (Spring Boot)', 'JavaScript / TypeScript (React, Node)', 'PHP', 'HTML/CSS', 'SQL/PL-SQL', 'Python (FastAPI)', 'Ruby on Rails', 'Angular', 'Rust'],
           values: skillValues.languages,
         },
         databases: {
@@ -450,7 +666,7 @@ export const content = {
         },
         tools: {
           title: 'Competence in tools and methodologies',
-          labels: ['Architecture (TOGAF)', 'CI/CD (Jenkins, Git)', 'Monitoring (Splunk)', 'Agile (Scrum/Kanban)', 'Cloud (Azure)', 'GitLab', 'Docker'],
+          labels: ['Architecture (TOGAF)', 'CI/CD (GitHub Actions, Jenkins, Git)', 'Monitoring (Splunk)', 'Agile (Scrum/Kanban)', 'Cloud (Azure)', 'GitLab', 'Docker & Linux', 'AI-assisted engineering'],
           values: skillValues.tools,
         },
       },
@@ -484,6 +700,11 @@ export const content = {
           icon: 'link',
           title: 'Holistic vision: from code to strategy',
           text: 'My experience as an Enterprise Architect (TOGAF, ArchiMate) gives me a perspective that connects technical decisions with business objectives, ensuring IT alignment and governance.',
+        },
+        {
+          icon: 'robot',
+          title: 'AI-assisted engineering, with rigor',
+          text: 'I design specifications, contracts and protocols to work with AI agents (Claude, Gemini and local models with Ollama) and verify every result with tests and real evidence. I documented it as a reusable framework under the MIT license.',
         },
       ],
     },

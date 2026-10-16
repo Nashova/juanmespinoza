@@ -9,6 +9,7 @@ PUBLIC_FILES=(index.html 404.html robots.txt sitemap.xml favicon.svg assets)
 
 cd "$(dirname "$0")/.."
 npm run build
+npm run pdf
 
 ssh "$HOST" "mkdir -p '$REMOTE_DIR/site'"
 scp -q deploy/docker-compose.yml deploy/nginx.conf "$HOST:$REMOTE_DIR/"

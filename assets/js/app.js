@@ -253,3 +253,4 @@ window.addEventListener('afterprint', () => {
 const wanted = initialLang();
 if (wanted === state.lang) hydrate();
 else render(wanted);
+if (new URLSearchParams(location.search).has('print')) setAllDetails(true);
