@@ -3,8 +3,7 @@ export const contact = {
   phoneDisplay: '+52 8110 416872',
   whatsapp: '528110416872',
   linkedin: 'https://www.linkedin.com/in/juanmanuelespinozanevarez',
-  // Vacío mientras el perfil público de GitHub no muestre proyectos propios; si se llena, aparece en contacto y pie.
-  github: '',
+  github: 'https://github.com/Nashova',
 };
 
 export const careerStart = { year: 2007, month: 7 };

@@ -34,7 +34,7 @@ npm run serve     # http://localhost:8099
 
 Para cambiar texto, experiencia, habilidades, teléfono o enlaces: edita **`assets/js/content.js`** y corre `npm run build`. Nunca edites `index.html`, `icons.js` ni `styles.css` a mano.
 
-Reglas del contenido: no publiques datos sensibles (domicilio, fecha de nacimiento, matrícula, créditos, sueldos, finanzas). El sitio solo expone correo, WhatsApp y LinkedIn. `contact.github` está vacío a propósito: se activa cuando el perfil público de GitHub muestre proyectos propios.
+Reglas del contenido: no publiques datos sensibles (domicilio, fecha de nacimiento, matrícula, créditos, sueldos, finanzas). El sitio solo expone correo, WhatsApp, LinkedIn y GitHub. `contact.github` apunta al perfil público de GitHub (LLM Dev Framework es público); si se deja vacío, el enlace desaparece de contacto, pie y datos estructurados.
 
 Todo lo que afirma `content.js` debe poder verificarse (repos, pruebas, documentación). Los PDF se regeneran en cada `deploy.sh`; en impresión se muestran completos los puestos recientes (`printCompact: true` los resume) y se omiten secciones de relleno.
 
