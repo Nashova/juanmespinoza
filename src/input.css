@@ -341,6 +341,14 @@
     @apply mt-4 list-disc space-y-2 pl-5 text-gray-600;
   }
 
+  .project-link {
+    @apply mt-5;
+  }
+
+  .project-link a {
+    @apply inline-flex items-center gap-2 text-sm font-semibold text-accent-dark underline underline-offset-4 hover:text-gray-900;
+  }
+
   .stack-list {
     @apply mt-auto flex flex-wrap gap-2 pt-6;
   }
@@ -589,6 +597,20 @@
   .project-summary,
   .project-list {
     margin-top: 0.3rem;
+  }
+
+  .project-link a {
+    display: block;
+    text-decoration: none;
+  }
+
+  .project-link svg {
+    display: none;
+  }
+
+  .project-link a::after {
+    content: ' — ' attr(href);
+    font-weight: 400;
   }
 
   .stack-list {

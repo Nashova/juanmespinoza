@@ -140,6 +140,7 @@ function renderProjects(c) {
           <p class="project-kind">${esc(item.kind)}</p>
           <p class="project-summary">${esc(item.summary)}</p>
           <ul class="project-list">${item.bullets.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>
+          ${item.url ? `<p class="project-link"><a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer">${icon('github')}<span>${esc(p.linkLabel)}</span><span class="sr-only"> ${esc(c.ui.newTab)}</span></a></p>` : ''}
           <ul class="stack-list" aria-label="${esc(p.stackLabel)}">${item.stack.map((s) => `<li class="stack-chip">${esc(s)}</li>`).join('')}</ul>
         </article>`,
     )

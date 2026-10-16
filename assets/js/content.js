@@ -191,7 +191,8 @@ export const content = {
       title: 'Proyectos',
       subtitle:
         'Productos completos que diseñé, construí y opero. Trabajo con ingeniería asistida por IA: yo defino la arquitectura, las especificaciones y los criterios de verificación; los agentes implementan, y yo reviso y valido con pruebas y evidencia real.',
-      note: 'El código de estos proyectos es privado; demos y revisión de código disponibles bajo solicitud.',
+      note: 'El código de la mayoría de estos proyectos es privado (LLM Dev Framework es público); demos y revisión de código disponibles bajo solicitud.',
+      linkLabel: 'Ver código en GitHub',
       stackLabel: 'Tecnologías',
       items: [
         {
@@ -223,6 +224,7 @@ export const content = {
         {
           name: 'LLM Dev Framework',
           kind: 'Framework con licencia MIT · 2026',
+          url: 'https://github.com/Nashova/LLM-Dev-Framework',
           summary:
             'Método reutilizable para construir y mantener software con agentes de IA como colaboradores técnicos, destilado de tres sistemas reales.',
           bullets: [
@@ -548,7 +550,8 @@ export const content = {
       title: 'Projects',
       subtitle:
         'Complete products I designed, built and operate. I work with AI-assisted engineering: I define the architecture, specifications and verification criteria; agents implement, and I review and validate with tests and real evidence.',
-      note: 'The code for these projects is private; demos and code reviews are available on request.',
+      note: 'The code for most of these projects is private (LLM Dev Framework is public); demos and code reviews are available on request.',
+      linkLabel: 'View code on GitHub',
       stackLabel: 'Technologies',
       items: [
         {
@@ -580,6 +583,7 @@ export const content = {
         {
           name: 'LLM Dev Framework',
           kind: 'MIT-licensed framework · 2026',
+          url: 'https://github.com/Nashova/LLM-Dev-Framework',
           summary:
             'Reusable method to build and maintain software with AI agents as technical collaborators, distilled from three real systems.',
           bullets: [
